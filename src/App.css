@@ -6,6 +6,7 @@
 
   /* Borders */
   --border: #e2e8f0;
+  --border-dark: #ccc;
 
   /* Backgrounds */
   --background: #f9fafb;
@@ -88,6 +89,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: sans-serif;
 }
 
 body {

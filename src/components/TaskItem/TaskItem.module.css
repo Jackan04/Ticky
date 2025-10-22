@@ -1,0 +1,22 @@
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.controlsRight,
+.controlsLeft {
+  display: flex;
+  align-items: center;
+}
+
+.iconTrash {
+  fill: var(--red-dark);
+}
+
+.iconCheckBox,
+.iconEllipsis {
+  fill: var(--subtext);
+}

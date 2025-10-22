@@ -1,6 +1,7 @@
 import "./App.css";
 import Button from "./components/Button/Button.jsx";
 import TaskInput from "./components/TaskInput/TaskInput.jsx";
+import TaskItem from "./components/TaskItem/TaskItem.jsx";
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
         <Button text="Button" variant="default"></Button>
       </div>
       <TaskInput />
+      <TaskItem text="Take out trash"></TaskItem>
     </>
   );
 }

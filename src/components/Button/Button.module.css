@@ -1,4 +1,7 @@
 .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: var(--padding-button);
   border: none;
   border-radius: var(--radius-md);
@@ -18,6 +21,10 @@
 }
 
 /* Button Variants */
+.transparent {
+  background-color: transparent;
+  box-shadow: none;
+}
 .default {
   background-color: var(--blue-light);
   color: var(--blue-dark);

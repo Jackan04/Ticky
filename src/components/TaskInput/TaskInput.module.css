@@ -1,0 +1,45 @@
+input {
+  border: none;
+  background-color: transparent;
+  font-size: var(--font-base);
+  width: 400px;
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
+  padding-right: var(--space-3);
+  color: var(--text-primary);
+}
+
+input::placeholder {
+  color: var(--subtext);
+}
+
+input:focus {
+  outline: none;
+}
+
+.container {
+  padding-left: var(--space-3);
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background-color: var(--grey-light);
+}
+
+.btnAdd {
+  border-radius: 0px var(--radius-md) var(--radius-md) 0px;
+}
+
+.iconPlus {
+  fill: var(--blue-dark);
+}
+
+.iconDropDown {
+  fill: var(--subtext);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+}

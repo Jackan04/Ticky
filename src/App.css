@@ -38,7 +38,7 @@
   /* Animations */
   --global-transition: 0.2s ease-in-out;
   --transform-scale: scale(1.02);
-  --transform-translateY: translateY(2px);
+  --transform-translateY: translateY(5px);
   --opacity-hover: 0.8;
 
   --padding-button: 10px 20px;
@@ -82,8 +82,6 @@
   --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
   --border: #3b3f46;
-  --accent: #8b6dff;
-  --accent-hover: #a58dff;
 }
 
 * {
@@ -94,4 +92,13 @@
 
 body {
   background-color: var(--background);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
 }

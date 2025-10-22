@@ -1,6 +1,7 @@
 import styles from "./Button.module.css";
 export default function Button({
   text,
+  icon,
   variant,
   className = "",
   onClick,
@@ -12,6 +13,7 @@ export default function Button({
       onClick={onClick}
       {...props}
     >
+      {icon}
       {text}
     </button>
   );

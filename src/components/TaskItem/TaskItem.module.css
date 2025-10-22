@@ -10,6 +10,11 @@
   color: var(--text-primary);
 }
 
+.text.completed {
+  color: var(--subtext);
+  text-decoration: line-through;
+}
+
 .controlsRight,
 .controlsLeft {
   display: flex;
@@ -20,7 +25,11 @@
   fill: var(--red-dark);
 }
 
-.iconCheckBox,
-.iconEllipsis {
+.iconEllipsis,
+.iconCheckBox {
   fill: var(--subtext);
+}
+
+.iconCheckBox.completed {
+  fill: var(--green-dark);
 }

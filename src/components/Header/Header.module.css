@@ -1,0 +1,12 @@
+.listButton {
+  display: flex;
+  align-items: center;
+}
+.iconPlus {
+  fill: currentColor;
+}
+
+.iconMoonFilled,
+.iconMoon {
+  fill: var(--text-primary);
+}

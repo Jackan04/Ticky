@@ -12,7 +12,7 @@ export default function TaskItem(props) {
           text={<CheckBoxIcon className={`icon ${styles.iconCheckBox} `} />}
           variant="transparent"
         />
-        <span className={styles.text}>{props.text}</span>
+        <p className={styles.text}>{props.text}</p>
       </div>
 
       <div className={styles.controlsRight}>

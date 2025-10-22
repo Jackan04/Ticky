@@ -1,11 +1,16 @@
 import "./App.css";
+import { ThemeProvider } from "./context/themeProvider.jsx";
+import { useTheme } from "./context/themeProvider.jsx";
 import Button from "./components/Button/Button.jsx";
 import TaskInput from "./components/TaskInput/TaskInput.jsx";
 import TaskItem from "./components/TaskItem/TaskItem.jsx";
 
-export default function App() {
+function AppContent() {
+  const { toggleTheme, darkMode } = useTheme();
+
   return (
-    <>
+    <div className="App">
+      <button onClick={toggleTheme}>Toggle Theme</button>
       <div>
         <Button text="Button" variant="success"></Button>
         <Button text="Button" variant="danger"></Button>
@@ -13,6 +18,14 @@ export default function App() {
       </div>
       <TaskInput />
       <TaskItem text="Take out trash"></TaskItem>
-    </>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }

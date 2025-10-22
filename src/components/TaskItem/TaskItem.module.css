@@ -6,6 +6,10 @@
   border-bottom: 1px solid var(--border-dark);
 }
 
+.text {
+  color: var(--text-primary);
+}
+
 .controlsRight,
 .controlsLeft {
   display: flex;

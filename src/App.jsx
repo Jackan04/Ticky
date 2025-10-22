@@ -1,7 +1,12 @@
 import "./App.css";
+import Button from "./components/Button/Button.jsx";
 
-function App() {
-  return <></>;
+export default function App() {
+  return (
+    <>
+      <Button text="Button" variant="success"></Button>
+      <Button text="Button" variant="default"></Button>
+      <Button text="Button" variant="danger"></Button>
+    </>
+  );
 }
-
-export default App;

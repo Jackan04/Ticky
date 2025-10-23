@@ -14,11 +14,7 @@
 }
 
 .btn:hover {
-  opacity: var(--opacity-hover);
-}
-
-.btn:active {
-  transform: var(--transform-translateY);
+  transform: var(--transform-translateY-negative);
 }
 
 /* Button Variants */

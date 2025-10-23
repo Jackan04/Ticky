@@ -21,6 +21,7 @@
 .transparent {
   background-color: transparent;
   box-shadow: none;
+  padding: 0;
 }
 .default {
   background-color: var(--blue-light);

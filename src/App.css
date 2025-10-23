@@ -46,7 +46,7 @@
   --transform-translateY-negative: translateY(-2px);
   --opacity-hover: 0.8;
 
-  --padding-button: 10px 20px;
+  --padding-button: 0.625rem 1.25rem;
 
   /* Spacings */
   --space-1: 0.25rem;
@@ -109,12 +109,37 @@
 body {
   background-color: var(--background);
   display: flex;
+  flex-wrap: wrap;
   height: 100vh;
   justify-content: center;
   align-items: center;
 }
 
 .icon {
+  fill: var(--text-primary);
   width: 24px;
   height: 24px;
+}
+
+h1,
+.title {
+  font-size: var(--font-title);
+  color: var(--text-primary);
+}
+
+h2,
+.heading {
+  font-size: var(--font-heading);
+  color: var(--text-primary);
+}
+
+p,
+.body {
+  font-size: var(--font-base);
+  color: var(--text-primary);
+}
+
+.subText {
+  font-size: var(--font-subtext);
+  color: var(--subtext);
 }

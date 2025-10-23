@@ -27,7 +27,9 @@ export default function Header() {
             darkMode ? (
               <LightbulbIcon className={`icon ${styles.iconMoon}`} />
             ) : (
-              <LightbulbFilledIcon className={`icon ${styles.iconMoonFilled}`} />
+              <LightbulbFilledIcon
+                className={`icon ${styles.iconMoonFilled}`}
+              />
             )
           }
         ></Button>

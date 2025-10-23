@@ -9,7 +9,7 @@ export default function TaskItem(props) {
     <div className={styles.task}>
       <div className={styles.controlsLeft}>
         <Button
-          text={
+          icon={
             <CheckBoxIcon
               className={`icon ${styles.iconCheckBox} ${
                 props.completed ? styles.completed : ""
@@ -19,7 +19,7 @@ export default function TaskItem(props) {
           variant="transparent"
         />
         <span
-          className={`${styles.text} ${
+          className={`body ${styles.text} ${
             props.completed ? styles.completed : ""
           }`}
         >

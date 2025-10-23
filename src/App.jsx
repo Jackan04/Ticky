@@ -8,6 +8,7 @@ import Header from "./components/Header/Header.jsx";
 import Modal from "./components/Modal/Modal.jsx";
 import TaskDetailsContent from "./components/Modal/TaskDetailsContent.jsx";
 import NewTaskContent from "./components/Modal/NewTaskContent.jsx";
+import NewListContent from "./components/Modal/NewListContent.jsx";
 
 function AppContent() {
   const [openModal, setOpenModal] = useState(null);
@@ -20,11 +21,15 @@ function AppContent() {
     <div className="App">
       <Header></Header>
       <div>
-        <Button text="Button" variant="success"></Button>
+        <Button
+          text="New List"
+          variant="success"
+          onClick={() => open("newList")}
+        ></Button>
         <Button
           text="New Task"
           variant="danger"
-          onClick={() => open("inputExample")}
+          onClick={() => open("newTask")}
         ></Button>
         <Button
           text="Task Details"
@@ -50,12 +55,20 @@ function AppContent() {
       </Modal>
 
       <Modal
-        isOpen={openModal === "inputExample"}
+        isOpen={openModal === "newTask"}
         onClose={close}
         title="New To-Do"
         buttonText="Save"
       >
-       <NewTaskContent></NewTaskContent>
+        <NewTaskContent></NewTaskContent>
+      </Modal>
+      <Modal
+        isOpen={openModal === "newList"}
+        onClose={close}
+        title="New List"
+        buttonText="Save"
+      >
+        <NewListContent></NewListContent>
       </Modal>
     </div>
   );

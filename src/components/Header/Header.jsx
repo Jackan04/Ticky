@@ -1,7 +1,7 @@
 import styles from "./Header.module.css";
 import ListIcon from "../../assets/icons/list.svg?react";
-import MoonIcon from "../../assets/icons/moon-regular.svg?react";
-import MoonFilledIcon from "../../assets/icons/moon-fill.svg?react";
+import LightbulbIcon from "../../assets/icons/lightbulb.svg?react";
+import LightbulbFilledIcon from "../../assets/icons/lightbulb-full.svg?react";
 import PlusIcon from "../../assets/icons/plus.svg?react";
 import { useTheme } from "../../context/themeProvider";
 import { useState } from "react";
@@ -25,9 +25,9 @@ export default function Header() {
           variant="transparent"
           icon={
             darkMode ? (
-              <MoonFilledIcon className={`icon ${styles.iconMoonFilled}`} />
+              <LightbulbIcon className={`icon ${styles.iconMoon}`} />
             ) : (
-              <MoonIcon className={`icon ${styles.iconMoon}`} />
+              <LightbulbFilledIcon className={`icon ${styles.iconMoonFilled}`} />
             )
           }
         ></Button>

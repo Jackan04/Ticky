@@ -1,4 +1,4 @@
-/* Modal*/
+/*Modal*/
 .modal {
   position: fixed;
   top: 0;
@@ -36,7 +36,7 @@
   width: 100%;
 }
 
-/* TaskDetailsContent */
+/* Task Details Content */
 .taskDetailsContent {
   display: flex;
   flex-direction: column;
@@ -51,11 +51,22 @@
   gap: var(--space-3);
 }
 
-.notes {
+.taskDetailsContent .notes {
   display: flex;
   align-items: start;
   padding: var(--space-5);
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
   background: var(--grey-light);
+}
+
+/* New Task Content */
+.newTaskContent{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.newTaskContent .notes{
+  min-height: 140px;
 }

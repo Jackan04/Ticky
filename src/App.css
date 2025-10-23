@@ -115,6 +115,78 @@ body {
   align-items: center;
 }
 
+input {
+  padding: var(--space-3);
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  width: 100%;
+  border-radius: var(--radius-md);
+  background-color: var(--grey-light);
+  border: 1px solid var(--border);
+  font-size: var(--font-base);
+  color: var(--text-primary);
+}
+
+textarea {
+  padding: var(--space-3);
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  width: 100%;
+  border-radius: var(--radius-md);
+  background-color: var(--grey-light);
+  border: 1px solid var(--border);
+  font-size: var(--font-base);
+  color: var(--text-primary);
+  resize: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--subtext);
+}
+
+/* Date input styling */
+input[type="date"]::-webkit-datetime-edit-text,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+  color: var(--subtext);
+}
+
+input[type="date"]:focus::-webkit-datetime-edit-text,
+input[type="date"]:focus::-webkit-datetime-edit-month-field,
+input[type="date"]:focus::-webkit-datetime-edit-day-field,
+input[type="date"]:focus::-webkit-datetime-edit-year-field {
+  color: var(--text-primary);
+}
+
+/* Date input calendar icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: opacity(0.5);
+}
+
+input[type="date"]:hover::-webkit-calendar-picker-indicator {
+  filter: opacity(1);
+}
+
+/* For dark mode - invert the calendar icon */
+[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) opacity(0.5);
+}
+
+[data-theme="dark"]
+  input[type="date"]:hover::-webkit-calendar-picker-indicator {
+  filter: invert(1) opacity(1);
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
 .icon {
   fill: var(--text-primary);
   width: 24px;

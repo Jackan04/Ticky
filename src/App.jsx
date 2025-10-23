@@ -7,32 +7,55 @@ import TaskItem from "./components/TaskItem/TaskItem.jsx";
 import Header from "./components/Header/Header.jsx";
 import Modal from "./components/Modal/Modal.jsx";
 import TaskDetailsContent from "./components/Modal/TaskDetailsContent.jsx";
+import NewTaskContent from "./components/Modal/NewTaskContent.jsx";
 
 function AppContent() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(null);
 
-  const open = () => setIsOpen(true);
+  const open = (name) => setOpenModal(name);
 
-  const close = () => setIsOpen(false);
+  const close = () => setOpenModal(null);
 
   return (
     <div className="App">
       <Header></Header>
       <div>
         <Button text="Button" variant="success"></Button>
-        <Button text="Button" variant="danger"></Button>
-        <Button text="Button" variant="default" onClick={open}></Button>
+        <Button
+          text="New Task"
+          variant="danger"
+          onClick={() => open("inputExample")}
+        ></Button>
+        <Button
+          text="Task Details"
+          variant="default"
+          onClick={() => open("taskDetails")}
+        ></Button>
       </div>
       <TaskInput />
       <TaskItem text="Take out trash" completed={true}></TaskItem>
       <TaskItem text="Take out trash" completed={false}></TaskItem>
 
-      <Modal isOpen={isOpen} onClose={close} title="Task Details" buttonText="Edit">
+      <Modal
+        isOpen={openModal === "taskDetails"}
+        onClose={close}
+        title="Task Details"
+        buttonText="Edit"
+      >
         <TaskDetailsContent
           title="Take out trash"
           dueDate="Oct 23, 2025"
           notes="nostrud esse laborum aute minim culpa id occaecat velit elit cillum qui qui aliquip Lorem consequat duis ea irure adipisicing in aute esse qui cupidatat nostrud nulla Lorem ad Lorem"
         />
+      </Modal>
+
+      <Modal
+        isOpen={openModal === "inputExample"}
+        onClose={close}
+        title="New To-Do"
+        buttonText="Save"
+      >
+       <NewTaskContent></NewTaskContent>
       </Modal>
     </div>
   );

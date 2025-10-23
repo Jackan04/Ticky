@@ -7,6 +7,7 @@ export default function TaskInput() {
   return (
     <div className={styles.container}>
       <input
+        className={styles.input}
         type="text"
         placeholder="New To-Do"
         autoComplete="off"

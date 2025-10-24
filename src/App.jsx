@@ -10,6 +10,7 @@ import TaskDetailsContent from "./components/Modal/TaskDetailsContent.jsx";
 import NewTaskContent from "./components/Modal/NewTaskContent.jsx";
 import NewListContent from "./components/Modal/NewListContent.jsx";
 import ListPicker from "./components/ListPicker/ListPicker.jsx";
+import StatsList from "./components/Stats/StatsList.jsx";
 
 function AppContent() {
   const [openModal, setOpenModal] = useState(null);
@@ -21,6 +22,8 @@ function AppContent() {
   return (
     <div className="App">
       <Header></Header>
+      <StatsList></StatsList>
+      
       <div>
         <Button
           text="New List"

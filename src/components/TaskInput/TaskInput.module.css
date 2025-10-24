@@ -20,7 +20,7 @@
 }
 
 .btnAdd {
-  border-radius: 0px var(--radius-md) var(--radius-md) 0px;
+  border-radius: 0px var(--radius-md) var(--radius-md) 0px !important;
 }
 
 .iconPlus {

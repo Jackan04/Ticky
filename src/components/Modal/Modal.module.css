@@ -61,12 +61,43 @@
 }
 
 /* New Task Content */
-.newTaskContent{
+.newTaskContent {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
 }
 
-.newTaskContent .notes{
+.newTaskContent .notes {
   min-height: 140px;
+}
+
+/* List Picker Content */
+.listPicker {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.listPicker .item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  border: solid 1px var(--border);
+}
+
+.listPicker .item.active {
+  background-color: var(--grey-light);
+}
+
+.listPicker .item:hover {
+  background-color: var(--grey-light);
 }

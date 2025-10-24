@@ -24,7 +24,16 @@ export default function Modal({
           ></Button>
         </div>
         <div>{children}</div>
-        <Button className={styles.actionButton} variant="success" onClick={onSubmit} text={buttonText}></Button>
+        {buttonText ? (
+          <Button
+            className={styles.actionButton}
+            variant="success"
+            onClick={onSubmit}
+            text={buttonText}
+          ></Button>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { db } from "./firebase";
+import { db } from "./FirebaseConfig";
 import {
   collection,
   addDoc,
@@ -10,11 +10,23 @@ import {
 
 export class FirebaseTaskService {
   constructor() {
-    const tasks = collection(db, "tasks");
+    this.tasksRef = collection(db, "tasks");
   }
-  
-  async getTasks() {}
-  
+
+  async getAllTasks() {
+    try {
+      const result = await getDocs(this.tasksRef);
+      const tasks = result.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      return tasks;
+    } catch (error) {
+      console.error("Error getting tasks:", error);
+      throw error;
+    }
+  }
+
   async getTask() {}
 
   async updateTask() {}

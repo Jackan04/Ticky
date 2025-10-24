@@ -2,7 +2,9 @@ import styles from "./TaskList.module.css";
 import TaskItem from "./TaskItem";
 import Modal from "../Modal/Modal";
 import TaskDetailsContent from "../Modal/TaskDetailsContent";
+import { useEffect, useState } from "react";
 import { useModal } from "../../context/modalProvider";
+import { FirebaseTaskService } from "../../firebase/FirebaseTaskService";
 
 // TODO: Pass active list (global context) as a prop to display the correct task list
 export default function TaskList() {

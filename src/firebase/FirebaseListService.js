@@ -20,7 +20,6 @@ export default class FirebaseListService {
         id: doc.id,
         ...doc.data(),
       }));
-      console.log(lists);
       return lists;
     } catch (error) {
       console.error("Error getting lists:", error);

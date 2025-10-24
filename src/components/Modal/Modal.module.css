@@ -81,7 +81,7 @@
   gap: var(--space-3);
 }
 
-.listPicker .item {
+.listPicker .list {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -94,10 +94,10 @@
   border: solid 1px var(--border);
 }
 
-.listPicker .item.active {
+.listPicker .list.active {
   background-color: var(--grey-light);
 }
 
-.listPicker .item:hover {
+.listPicker .list:hover {
   background-color: var(--grey-light);
 }

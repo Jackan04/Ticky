@@ -9,6 +9,7 @@ import Modal from "./components/Modal/Modal.jsx";
 import TaskDetailsContent from "./components/Modal/TaskDetailsContent.jsx";
 import NewTaskContent from "./components/Modal/NewTaskContent.jsx";
 import NewListContent from "./components/Modal/NewListContent.jsx";
+import ListPicker from "./components/ListPicker/ListPicker.jsx";
 
 function AppContent() {
   const [openModal, setOpenModal] = useState(null);
@@ -40,6 +41,7 @@ function AppContent() {
       <TaskInput />
       <TaskItem text="Take out trash" completed={true}></TaskItem>
       <TaskItem text="Take out trash" completed={false}></TaskItem>
+      <ListPicker></ListPicker>
 
       <Modal
         isOpen={openModal === "taskDetails"}

@@ -1,4 +1,4 @@
-import { db } from "./firebase";
+import { db } from "./FirebaseConfig";
 import {
   collection,
   addDoc,
@@ -8,12 +8,25 @@ import {
   doc,
 } from "firebase/firestore";
 
-export class FirebaseListService {
+export default class FirebaseListService {
   constructor() {
-    const lists = collection(db, "lists");
+    this.listsRef = collection(db, "lists");
   }
 
-  async getLists() {}
+  async getAllLists() {
+    try {
+      const result = await getDocs(this.listsRef);
+      const lists = result.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      console.log(lists);
+      return lists;
+    } catch (error) {
+      console.error("Error getting lists:", error);
+      throw error;
+    }
+  }
 
   async getList() {}
 

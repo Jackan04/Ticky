@@ -1,3 +1,12 @@
+/* Stats List */
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+
+}
+
 /* Stat Card */
 .card {
   display: inline-flex;
@@ -9,12 +18,12 @@
 }
 
 .count {
-  padding: var(--space-3);
+  padding: var(--space-2);
   border-radius: var(--radius-md) 0 0 var(--radius-md);
 }
 
 .title {
-  padding: var(--space-3);
+  padding: var(--space-2);
   color: var(--subtext);
 }
 
@@ -31,11 +40,4 @@
 .count.remaining {
   color: var(--red-dark);
   background-color: var(--red-light);
-}
-
-/* Stats List */
-.stats{
-    display: flex;
-    justify-content: center;
-    gap: var(--space-5);
 }

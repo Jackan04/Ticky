@@ -6,9 +6,14 @@ import PlusIcon from "../../assets/icons/plus.svg?react";
 import { useTheme } from "../../context/themeProvider";
 import { useState } from "react";
 import Button from "../Button/Button";
+import Modal from "../Modal/Modal";
+import NewListContent from "../Modal/NewListContent";
+import { useModal } from "../../context/modalProvider.jsx";
+
 
 export default function Header() {
   const { toggleTheme, darkMode } = useTheme();
+  const { open, close, activeModal } = useModal();
   const [activeList, setActiveList] = useState("Personal");
 
   return (
@@ -38,8 +43,17 @@ export default function Header() {
           text="List"
           icon={<PlusIcon className={`icon ${styles.iconPlus}`} />}
           variant="default"
+          onClick={() => open("newList")}
         ></Button>
       </div>
+      <Modal
+        isOpen={activeModal === "newList"}
+        onClose={close}
+        title="New List"
+        buttonText="Save"
+      >
+        <NewListContent></NewListContent>
+      </Modal>
     </div>
   );
 }

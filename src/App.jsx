@@ -1,9 +1,8 @@
 import "./App.css";
 import { ThemeProvider } from "./context/themeProvider.jsx";
-import { useState } from "react";
-import Button from "./components/Button/Button.jsx";
+import { ModalProvider, useModal } from "./context/modalProvider.jsx";
 import TaskInput from "./components/TaskInput/TaskInput.jsx";
-import TaskItem from "./components/TaskItem/TaskItem.jsx";
+import TaskList from "./components/TaskList/TaskList.jsx";
 import Header from "./components/Header/Header.jsx";
 import Modal from "./components/Modal/Modal.jsx";
 import TaskDetailsContent from "./components/Modal/TaskDetailsContent.jsx";
@@ -13,68 +12,21 @@ import ListPicker from "./components/ListPicker/ListPicker.jsx";
 import StatsList from "./components/Stats/StatsList.jsx";
 
 function AppContent() {
-  const [openModal, setOpenModal] = useState(null);
-
-  const open = (name) => setOpenModal(name);
-
-  const close = () => setOpenModal(null);
+  const { open, close, activeModal } = useModal();
 
   return (
     <div className="App">
       <Header></Header>
-      <StatsList></StatsList>
-      
-      <div>
-        <Button
-          text="New List"
-          variant="success"
-          onClick={() => open("newList")}
-        ></Button>
-        <Button
-          text="New Task"
-          variant="danger"
-          onClick={() => open("newTask")}
-        ></Button>
-        <Button
-          text="Task Details"
-          variant="default"
-          onClick={() => open("taskDetails")}
-        ></Button>
-      </div>
       <TaskInput />
-      <TaskItem text="Take out trash" completed={true}></TaskItem>
-      <TaskItem text="Take out trash" completed={false}></TaskItem>
-      <ListPicker></ListPicker>
+      <StatsList></StatsList>
+      <TaskList></TaskList>
 
-      <Modal
-        isOpen={openModal === "taskDetails"}
-        onClose={close}
-        title="Task Details"
-        buttonText="Edit"
-      >
-        <TaskDetailsContent
-          title="Take out trash"
-          dueDate="Oct 23, 2025"
-          notes="nostrud esse laborum aute minim culpa id occaecat velit elit cillum qui qui aliquip Lorem consequat duis ea irure adipisicing in aute esse qui cupidatat nostrud nulla Lorem ad Lorem"
-        />
-      </Modal>
+      {/* <ListPicker></ListPicker> */}
 
-      <Modal
-        isOpen={openModal === "newTask"}
-        onClose={close}
-        title="New To-Do"
-        buttonText="Save"
-      >
-        <NewTaskContent></NewTaskContent>
-      </Modal>
-      <Modal
-        isOpen={openModal === "newList"}
-        onClose={close}
-        title="New List"
-        buttonText="Save"
-      >
-        <NewListContent></NewListContent>
-      </Modal>
+ 
+
+    
+ 
     </div>
   );
 }
@@ -82,7 +34,9 @@ function AppContent() {
 export default function App() {
   return (
     <ThemeProvider>
-      <AppContent />
+      <ModalProvider>
+        <AppContent />
+      </ModalProvider>
     </ThemeProvider>
   );
 }

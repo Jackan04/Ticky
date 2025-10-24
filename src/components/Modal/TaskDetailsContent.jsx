@@ -3,7 +3,7 @@ import CheckBoxIcon from "../../assets/icons/check-box.svg?react";
 import Button from "../Button/Button";
 import styles from "./Modal.module.css";
 
-export default function TaskDetailsContent({ title, dueDate, notes }) {
+export default function TaskDetailsContent({ task }) {
   return (
     <div className={styles.taskDetailsContent}>
       <div className={styles.taskTitle}>
@@ -11,14 +11,14 @@ export default function TaskDetailsContent({ title, dueDate, notes }) {
           variant="transparent"
           icon={<CheckBoxIcon className="icon" />}
         ></Button>
-        <h2>{title}</h2>
+        <h2>{task.title}</h2>
       </div>
       <div className={styles.dueDate}>
         <CalendarIcon className="icon" />
-        <p>{dueDate}</p>
+        <p>{task.dueDate}</p>
       </div>
       <div className={styles.notes}>
-        <p>{notes}</p>
+        <p>{task.notes}</p>
       </div>
     </div>
   );

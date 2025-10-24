@@ -15,12 +15,12 @@ export const ListProvider = ({ children }) => {
     const listService = new FirebaseListService();
 
     try {
-      const result = await listService.getAllLists();
-      result.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
-      setLists(result);
+      const results = await listService.getAllLists();
+      results.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+      setLists(results);
 
-      if (!activeList && result.length) {
-        setActiveList(result[0]);
+      if (!activeList && results.length) {
+        setActiveList(results[0]);
       }
     } catch (error) {
       console.error("Failed to load lists: ", error);

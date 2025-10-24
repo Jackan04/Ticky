@@ -6,12 +6,14 @@ import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
 import TaskDetailsContent from "../Modal/TaskDetailsContent";
 import { useModal } from "../../context/modalProvider.jsx";
+import { formatDate } from "../../../helpers.js";
 
-export default function TaskItem({ title, dueDate, notes, completed }) {
+export default function TaskItem({ task }) {
   const { open } = useModal();
 
   const handleOpenDetails = () => {
-    open("taskDetails", { title, dueDate, notes, completed });
+    const payload = { ...task, dueDate: formatDate(task?.dueDate) };
+    open("taskDetails", payload);
   };
 
   return (
@@ -21,16 +23,18 @@ export default function TaskItem({ title, dueDate, notes, completed }) {
           icon={
             <CheckBoxIcon
               className={`icon ${styles.iconCheckBox} ${
-                completed ? styles.completed : ""
+                task.completed ? styles.completed : ""
               }`}
             />
           }
           variant="transparent"
         />
         <span
-          className={`body ${styles.text} ${completed ? styles.completed : ""}`}
+          className={`body ${styles.text} ${
+            task.completed ? styles.completed : ""
+          }`}
         >
-          {title}
+          {task.title}
         </span>
       </div>
 

@@ -15,10 +15,11 @@ export class FirebaseTaskService {
 
   async getAllTasks() {
     try {
-      const result = await getDocs(this.tasksRef);
-      const tasks = result.docs.map((doc) => ({
+      const results = await getDocs(this.tasksRef);
+      const tasks = results.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
+        
       }));
       return tasks;
     } catch (error) {

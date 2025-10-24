@@ -7,8 +7,13 @@ import Modal from "../Modal/Modal";
 import TaskDetailsContent from "../Modal/TaskDetailsContent";
 import { useModal } from "../../context/modalProvider.jsx";
 
-export default function TaskItem(props) {
-  const { open, close, activeModal } = useModal();
+export default function TaskItem({ title, dueDate, notes, completed }) {
+  const { open } = useModal();
+
+  const handleOpenDetails = () => {
+    open("taskDetails", { title, dueDate, notes, completed });
+  };
+
   return (
     <li className={styles.task}>
       <div className={styles.controlsLeft}>
@@ -16,18 +21,16 @@ export default function TaskItem(props) {
           icon={
             <CheckBoxIcon
               className={`icon ${styles.iconCheckBox} ${
-                props.completed ? styles.completed : ""
+                completed ? styles.completed : ""
               }`}
             />
           }
           variant="transparent"
         />
         <span
-          className={`body ${styles.text} ${
-            props.completed ? styles.completed : ""
-          }`}
+          className={`body ${styles.text} ${completed ? styles.completed : ""}`}
         >
-          {props.text}
+          {title}
         </span>
       </div>
 
@@ -35,25 +38,12 @@ export default function TaskItem(props) {
         <Button
           text={<EllipsisIcon className={`icon ${styles.iconEllipsis} `} />}
           variant="transparent"
-          onClick={() => open("taskDetails")}
+          onClick={handleOpenDetails}
         />
         <Button
           text={<TrashIcon className={`icon ${styles.iconTrash} `} />}
           variant="transparent"
         />
-
-        <Modal
-          isOpen={activeModal === "taskDetails"}
-          onClose={close}
-          title="Task Details"
-          buttonText="Edit"
-        >
-          <TaskDetailsContent
-            title="Take out trash"
-            dueDate="Oct 23, 2025"
-            notes="nostrud esse laborum aute minim culpa id occaecat velit elit cillum qui qui aliquip Lorem consequat duis ea irure adipisicing in aute esse qui cupidatat nostrud nulla Lorem ad Lorem"
-          />
-        </Modal>
       </div>
     </li>
   );

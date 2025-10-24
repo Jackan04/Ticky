@@ -12,7 +12,7 @@ export default function NewTaskContent({ inputTitle }) {
       <input type="date"></input>
       <textarea
         className={styles.notes}
-        name="task-title"
+        name="task-notes"
         id="task-notes"
         placeholder="Notes"
       ></textarea>

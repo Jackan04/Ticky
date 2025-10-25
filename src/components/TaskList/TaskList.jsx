@@ -14,22 +14,25 @@ export default function TaskList() {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
+    if (!activeList) {
+      setTasks([]);
+      return;
+    }
+
     const taskService = new FirebaseTaskService();
 
     async function load() {
-      // If activeList isn't ready yet, don't filter by its id yet.
-      if (!activeList) {
-        setTasks([]);
-        return;
-      }
-
       const results = await taskService.getAllTasks();
       const filtered = results.filter((item) => item.listId === activeList.id);
-      setTasks(filtered);
+      setTasks(filtered || []);
     }
 
     load();
   }, [activeList, getActiveList]);
+
+  if (!activeList || activeList.taskCount === 0) {
+    return <p className={styles.emptyState}>No To-Dos Yet</p>;
+  }
 
   return (
     <div>

@@ -16,7 +16,7 @@ export const ListProvider = ({ children }) => {
 
     try {
       const results = await listService.getAllLists();
-      results.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+      results.sort((a, b) => (a.name || "").localeCompare(b.name || "")); // Sort lists by name
       setLists(results);
 
       if (!activeList && results.length) {

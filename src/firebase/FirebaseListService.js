@@ -1,4 +1,5 @@
 import { db } from "./FirebaseConfig";
+import mapFirebaseList from "../mappers/listMapper";
 import {
   collection,
   addDoc,
@@ -16,10 +17,7 @@ export default class FirebaseListService {
   async getAllLists() {
     try {
       const result = await getDocs(this.listsRef);
-      const lists = result.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+      const lists = result.docs.map((doc) => mapFirebaseList(doc));
       return lists;
     } catch (error) {
       console.error("Error getting lists:", error);

@@ -4,7 +4,7 @@ export default function mapFirebaseTask(doc) {
   const data = doc.data();
 
   const task = {
-    id: data.id,
+    id: doc.id,
     title: data.title,
     completed: data.completed,
     notes: data.notes,

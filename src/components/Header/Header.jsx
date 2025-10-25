@@ -18,12 +18,6 @@ export default function Header() {
   const { open, close, activeModal } = useModal();
   const { activeList } = useList();
 
-
-  useEffect(() => {
-      
-  })
-
-
   return (
     <div className={styles.container}>
       <Button

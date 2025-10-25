@@ -4,6 +4,11 @@
   align-self: stretch;
 }
 
+.emptyState {
+  align-self: center;
+  color: var(--subtext);
+}
+
 /* Task Item */
 .task {
   display: flex;

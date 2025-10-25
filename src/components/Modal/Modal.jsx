@@ -5,8 +5,9 @@ import XMarkIcon from "../../assets/icons/xmark.svg?react";
 export default function Modal({
   isOpen,
   onClose,
-  onSubmit,
+  onClick,
   buttonText,
+  buttonVariant = "success",
   title,
   children,
 }) {
@@ -27,8 +28,8 @@ export default function Modal({
         {buttonText ? (
           <Button
             className={styles.actionButton}
-            variant="success"
-            onClick={onSubmit}
+            variant={buttonVariant}
+            onClick={onClick}
             text={buttonText}
           ></Button>
         ) : (

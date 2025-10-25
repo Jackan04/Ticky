@@ -6,6 +6,8 @@ import TaskInput from "./components/TaskInput/TaskInput.jsx";
 import TaskList from "./components/TaskList/TaskList.jsx";
 import Header from "./components/Header/Header.jsx";
 import StatsList from "./components/Stats/StatsList.jsx";
+import Modal from "./components/Modal/Modal.jsx";
+import ActionConfirmContent from "./components/Modal/ActionConfirmContent.jsx";
 
 function AppContent() {
   const { open, close, activeModal } = useModal();
@@ -16,6 +18,7 @@ function AppContent() {
       <TaskInput />
       <StatsList></StatsList>
       <TaskList></TaskList>
+     
     </div>
   );
 }

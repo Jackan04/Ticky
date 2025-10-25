@@ -23,6 +23,11 @@
   box-shadow: none;
   padding: 0;
 }
+
+.neutral {
+  background-color: var(--grey-light);
+  color: var(--grey-dark);
+}
 .default {
   background-color: var(--blue-light);
   color: var(--blue-dark);

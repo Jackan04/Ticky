@@ -41,6 +41,8 @@ export default function TaskList() {
       >
         {modalData && <TaskDetailsContent task={modalData} />}
       </Modal>
+
+
     </div>
   );
 }

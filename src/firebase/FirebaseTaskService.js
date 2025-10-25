@@ -29,7 +29,15 @@ export class FirebaseTaskService {
 
   async updateTask() {}
 
-  async addTask() {}
+  async addTask(task) {
+    try {
+      const taskRef = await addDoc(this.tasksRef, task);
+      console.log("Document written: ", taskRef);
+    } catch (error) {
+      console.error("Error adding task:", error);
+      throw error;
+    }
+  }
 
   async deleteTask() {}
 }

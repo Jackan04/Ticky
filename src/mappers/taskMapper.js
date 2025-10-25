@@ -6,10 +6,12 @@ export default function mapFirebaseTask(doc) {
   const task = {
     id: doc.id,
     title: data.title,
-    completed: data.completed,
-    notes: data.notes,
-    dueDate: formatDate(data.dueDate),
-    createdAt: data.createdAt,
+    completed: data.completed ?? false,
+    notes: data.notes ?? "",
+    dueDate: formatDate(data.dueDate) ?? null,
+    createdAt: data.createdAt ?? Date.now(),
+    // Normalize listId so UI always gets a plain string id regardless of how
+    // the value is stored in Firestore (DocumentReference or string).
     listId: normalizeListId(data.listId),
   };
 

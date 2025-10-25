@@ -7,6 +7,7 @@ import {
   updateDoc,
   deleteDoc,
   doc,
+  increment,
 } from "firebase/firestore";
 
 export default class FirebaseListService {
@@ -23,6 +24,11 @@ export default class FirebaseListService {
       console.error("Error getting lists:", error);
       throw error;
     }
+  }
+
+  async updateTaskCount(listId, delta = 1) {
+    const listRef = doc(db, "lists", listId);
+    await updateDoc(listRef, { taskCount: increment(delta) });
   }
 
   async getList() {}

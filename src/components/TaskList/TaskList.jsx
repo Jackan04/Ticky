@@ -30,9 +30,9 @@ export default function TaskList() {
     load();
   }, [activeList, getActiveList]);
 
-  if (!activeList || activeList.taskCount === 0) {
-    return <p className={styles.emptyState}>No To-Dos Yet</p>;
-  }
+  // if (!activeList || activeList.taskCount === 0) {
+  //   return <p className={styles.emptyState}>No To-Dos Yet</p>;
+  // }
 
   return (
     <div>

@@ -39,5 +39,11 @@ export class FirebaseTaskService {
     }
   }
 
-  async deleteTask() {}
+  async deleteTask(task) {
+    try {
+       await deleteDoc(doc(this.tasksRef, task.id));
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  }
 }

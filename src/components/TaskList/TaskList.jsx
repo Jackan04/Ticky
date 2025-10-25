@@ -10,7 +10,8 @@ import { useList } from "../../context/listProvider";
 
 export default function TaskList() {
   const { close, activeModal, modalData } = useModal();
-  const { getActiveList, activeList } = useList();
+  const { getActiveList, activeList, decrementTaskCount, loadAllLists } =
+    useList();
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -30,9 +31,24 @@ export default function TaskList() {
     load();
   }, [activeList, getActiveList]);
 
-  // if (!activeList || activeList.taskCount === 0) {
-  //   return <p className={styles.emptyState}>No To-Dos Yet</p>;
-  // }
+  async function handleDeleteTask(task) {
+    if (!task?.id) return;
+    const taskService = new FirebaseTaskService();
+    try {
+      await taskService.deleteTask(task);
+      close();
+      setTasks((prev) => prev.filter((t) => t.id !== task.id));
+      await decrementTaskCount();
+      activeList.taskCount--;
+      await loadAllLists();
+    } catch (error) {
+      console.error("Failed to delete task", error);
+    }
+  }
+
+  if (!activeList || activeList.taskCount === 0) {
+    return <p className={styles.emptyState}>No To-Dos Yet</p>;
+  }
 
   return (
     <div>
@@ -60,7 +76,7 @@ export default function TaskList() {
         <ActionConfirmContent
           action="Delete"
           subText="Deleting this task will completely remove it, and you won’t be able to restore it."
-          onClick={() => alert("Deleted Successfully")}
+          onClick={() => handleDeleteTask(modalData)}
         />
       </Modal>
     </div>

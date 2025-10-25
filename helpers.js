@@ -16,14 +16,16 @@ export const formatDate = (d) => {
   return String(d);
 };
 
+// Each task contains a reference to a list document (listId)
+// To retrieve the list's id, the reference must be normalized first
 export const normalizeListId = (listId) => {
   if (listId == null) return null;
   if (typeof listId === "string") return listId;
   if (typeof listId === "object") {
-    if ("id" in listId && listId.id) return listId.id; // DocumentReference.id
+    if ("id" in listId && listId.id) return listId.id; 
     if ("path" in listId && typeof listId.path === "string") {
       const parts = listId.path.split("/");
-      return parts[parts.length - 1]; // last segment is the doc id
+      return parts[parts.length - 1]; 
     }
   }
   return String(listId);

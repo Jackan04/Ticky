@@ -8,7 +8,6 @@ export default function mapFirebaseTask(doc) {
     title: data.title,
     completed: data.completed,
     notes: data.notes,
-    // dueDate: data.dueDate,
     dueDate: formatDate(data.dueDate),
     createdAt: data.createdAt,
     listId: normalizeListId(data.listId),

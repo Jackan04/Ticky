@@ -15,10 +15,10 @@ export default function TaskDetailsContent({ task }) {
       </div>
       <div className={styles.dueDate}>
         <CalendarIcon className="icon" />
-        <p>{task.dueDate}</p>
+        <p>{task.dueDate || "No due date"}</p>
       </div>
       <div className={styles.notes}>
-        <p>{task.notes}</p>
+        <p>{task.notes || "No notes"}</p>
       </div>
     </div>
   );

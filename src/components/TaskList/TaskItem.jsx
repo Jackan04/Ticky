@@ -11,10 +11,13 @@ import { formatDate } from "../../../helpers.js";
 export default function TaskItem({ task }) {
   const { open } = useModal();
 
-  const handleOpenDetails = () => {
-    const payload = { ...task, dueDate: formatDate(task?.dueDate) };
-    open("taskDetails", payload);
-  };
+  function handleOpenDetails() {
+    open("taskDetails", task);
+  }
+
+  function handleOpenDelete() {
+    open("confirmDelete", task);
+  }
 
   return (
     <li className={styles.task}>
@@ -47,6 +50,7 @@ export default function TaskItem({ task }) {
         <Button
           text={<TrashIcon className={`icon ${styles.iconTrash} `} />}
           variant="transparent"
+          onClick={handleOpenDelete}
         />
       </div>
     </li>

@@ -15,3 +15,16 @@ export const formatDate = (d) => {
   }
   return String(d);
 };
+
+export const normalizeListId = (listId) => {
+  if (listId == null) return null;
+  if (typeof listId === "string") return listId;
+  if (typeof listId === "object") {
+    if ("id" in listId && listId.id) return listId.id; // DocumentReference.id
+    if ("path" in listId && typeof listId.path === "string") {
+      const parts = listId.path.split("/");
+      return parts[parts.length - 1]; // last segment is the doc id
+    }
+  }
+  return String(listId);
+};

@@ -2,6 +2,7 @@ import styles from "./TaskList.module.css";
 import TaskItem from "./TaskItem";
 import Modal from "../Modal/Modal";
 import TaskDetailsContent from "../Modal/TaskDetailsContent";
+import ActionConfirmContent from "../Modal/ActionConfirmContent";
 import { useEffect, useState } from "react";
 import { useModal } from "../../context/modalProvider";
 import { FirebaseTaskService } from "../../firebase/FirebaseTaskService";
@@ -9,20 +10,26 @@ import { useList } from "../../context/listProvider";
 
 export default function TaskList() {
   const { close, activeModal, modalData } = useModal();
-  const { getActiveList } = useList();
+  const { getActiveList, activeList } = useList();
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     const taskService = new FirebaseTaskService();
-    const list = getActiveList();
 
     async function load() {
+      // If activeList isn't ready yet, don't filter by its id yet.
+      if (!activeList) {
+        setTasks([]);
+        return;
+      }
+
       const results = await taskService.getAllTasks();
-      // const filtered = results.filter(item => item.listId === list.id);
-      setTasks(results);
+      const filtered = results.filter((item) => item.listId === activeList.id);
+      setTasks(filtered);
     }
+
     load();
-  }, []);
+  }, [activeList, getActiveList]);
 
   return (
     <div>
@@ -42,7 +49,17 @@ export default function TaskList() {
         {modalData && <TaskDetailsContent task={modalData} />}
       </Modal>
 
-
+      <Modal
+        isOpen={activeModal === "confirmDelete"}
+        onClose={close}
+        title="Confirm Deletion"
+      >
+        <ActionConfirmContent
+          action="Delete"
+          subText="Deleting this task will completely remove it, and you won’t be able to restore it."
+          onClick={() => alert("Deleted Successfully")}
+        />
+      </Modal>
     </div>
   );
 }

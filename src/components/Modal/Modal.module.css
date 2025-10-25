@@ -102,3 +102,13 @@
 .listPicker .list:hover {
   background-color: var(--grey-light);
 }
+
+/* Confirm Action Content */
+.confirmActionContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+
+

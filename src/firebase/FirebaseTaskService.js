@@ -1,4 +1,5 @@
 import { db } from "./FirebaseConfig";
+import mapFirebaseTask from "../mappers/taskMapper";
 import {
   collection,
   addDoc,
@@ -16,11 +17,7 @@ export class FirebaseTaskService {
   async getAllTasks() {
     try {
       const results = await getDocs(this.tasksRef);
-      const tasks = results.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-        
-      }));
+      const tasks = results.docs.map((doc) => mapFirebaseTask(doc));
       return tasks;
     } catch (error) {
       console.error("Error getting tasks:", error);

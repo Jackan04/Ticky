@@ -5,7 +5,7 @@ import TrashIcon from "../../assets/icons/trash.svg?react";
 import Button from "../Button/Button";
 import { useModal } from "../../context/modalProvider.jsx";
 
-export default function TaskItem({ task }) {
+export default function TaskItem({ task, onClick }) {
   const { open } = useModal();
 
   function handleOpenDetails() {
@@ -28,6 +28,7 @@ export default function TaskItem({ task }) {
             />
           }
           variant="transparent"
+          onClick={onClick}
         />
         <span
           className={`body ${styles.text} ${

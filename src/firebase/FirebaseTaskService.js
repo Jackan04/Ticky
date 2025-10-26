@@ -44,6 +44,18 @@ export class FirebaseTaskService {
     }
   }
 
+  async toggleTaskCompleted(task) {
+    const tasksDocRef = doc(db, "tasks", task.id);
+    try {
+      const updatedTask = await updateDoc(tasksDocRef, {
+        completed: task.completed ? task.completed = false : task.completed = true,
+      });
+      console.log("Task completed: ", updatedTask.completed);
+    } catch (error) {
+      console.error("Error toggling task completion:", error);
+    }
+  }
+
   async addTask(task) {
     try {
       const taskRef = await addDoc(this.tasksRef, task);

@@ -66,6 +66,14 @@ export default function TaskList() {
     close();
   }
 
+    async function toggleCompleted(task) {
+    const taskService = new FirebaseTaskService();
+    await taskService.toggleTaskCompleted(task);
+    loadAllLists();
+  }
+
+
+
   if (!activeList || activeList.taskCount === 0) {
     return <p className={styles.emptyState}>No To-Dos Yet</p>;
   }
@@ -74,7 +82,7 @@ export default function TaskList() {
     <div>
       <ul className={styles.list}>
         {tasks.map((task) => (
-          <TaskItem key={task.id} task={task} />
+          <TaskItem key={task.id} task={task} onClick={() => toggleCompleted(task)} />
         ))}
       </ul>
 

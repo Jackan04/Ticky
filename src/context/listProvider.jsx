@@ -35,7 +35,7 @@ export const ListProvider = ({ children }) => {
   }, []);
 
   function toggleActiveList(list) {
-    setActiveList(list);
+    setActiveList(list || lists[0]);
   }
 
   function getActiveList() {
@@ -48,12 +48,11 @@ export const ListProvider = ({ children }) => {
     activeList.taskCount++;
   }
 
-   async function decrementTaskCount() {
-     const listService = new FirebaseListService();
-     await listService.updateTaskCount(activeList.id, -1);
-     activeList.taskCount--;
-   }
-
+  async function decrementTaskCount() {
+    const listService = new FirebaseListService();
+    await listService.updateTaskCount(activeList.id, -1);
+    activeList.taskCount--;
+  }
 
   return (
     <ListContext.Provider

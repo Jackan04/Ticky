@@ -46,5 +46,11 @@ export default class FirebaseListService {
     }
   }
 
-  async deleteList() {}
+  async deleteList(list) {
+    try {
+      await deleteDoc(doc(this.listsRef, list.id));
+    } catch (error) {
+      console.error("Error deleting list:", error);
+    }
+  }
 }

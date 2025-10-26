@@ -93,6 +93,30 @@
   background-color: var(--grey-light);
 }
 
+.controlsRight,
+.controlsLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.iconTrash {
+  fill: var(--red-dark);
+}
+
+.iconEllipsis,
+.iconCheckBox {
+  fill: var(--subtext);
+}
+
+.listPicker .list .hide {
+  display: none;
+}
+
+.listPicker .list:hover .hide {
+  display: inline-flex;
+}
+
 /* Confirm Action Content */
 .confirmActionContent {
   display: flex;

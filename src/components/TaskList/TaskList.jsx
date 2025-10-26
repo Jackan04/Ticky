@@ -18,6 +18,7 @@ export default function TaskList() {
 
   useEffect(() => {
     if (modalData) {
+      setIsEditing(false);
       setEditedTask(modalData);
     }
   }, [modalData]);

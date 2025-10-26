@@ -39,7 +39,6 @@ export default function TaskList() {
       close();
       setTasks((prev) => prev.filter((t) => t.id !== task.id));
       await decrementTaskCount();
-      activeList.taskCount--;
       await loadAllLists();
     } catch (error) {
       console.error("Failed to delete task", error);

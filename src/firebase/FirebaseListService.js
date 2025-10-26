@@ -31,7 +31,7 @@ export default class FirebaseListService {
 
   async addList(list) {
     try {
-      const newList = { name: list.name, taskCount: 0, createdAt: Date.now() };
+      const newList = { name: list.name, createdAt: Date.now() };
 
       await addDoc(this.listsRef, newList);
       console.log("New list added: ", newList);

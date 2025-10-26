@@ -58,9 +58,9 @@
   gap: var(--space-4);
 }
 
-.newTaskContent .notes {
+/* .newTaskContent .notes {
   min-height: 140px;
-}
+} */
 
 /* List Picker Content */
 .listPickerContainer {

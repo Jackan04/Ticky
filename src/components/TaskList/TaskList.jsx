@@ -10,11 +10,17 @@ import { useList } from "../../context/listProvider";
 
 export default function TaskList() {
   const { close, activeModal, modalData } = useModal();
-  const { activeList, loadAllLists } =
-    useList();
+  const { activeList, loadAllLists } = useList();
   const [tasks, setTasks] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState(null);
+
+  useEffect(() => {
+    async function load() {
+      reloadTasks();
+    }
+    load();
+  }, [activeList]);
 
   useEffect(() => {
     if (modalData) {
@@ -23,33 +29,26 @@ export default function TaskList() {
     }
   }, [modalData]);
 
-  useEffect(() => {
+  async function reloadTasks() {
     const taskService = new FirebaseTaskService();
 
-    async function loadAllTasks() {
+    if (!activeList) {
       const allTasks = await taskService.getAllTasks();
       setTasks(allTasks);
-    }
-
-    async function load() {
+    } else {
       const resultsByList = await taskService.getTasksByList(activeList.id);
       setTasks(resultsByList || []);
     }
-
-    if (!activeList) {
-      loadAllTasks();
-    } else {
-      load();
-    }
-  }, [activeList]);
+  }
 
   async function handleDeleteTask(task) {
     if (!task?.id) return;
     const taskService = new FirebaseTaskService();
     try {
       await taskService.deleteTask(task);
-      close();
       await loadAllLists();
+      await reloadTasks();
+      close();
     } catch (error) {
       console.error("Failed to delete task", error);
     }
@@ -64,20 +63,19 @@ export default function TaskList() {
 
     await taskService.updateTask(editedTask);
     setIsEditing(false);
-    loadAllLists();
+    await loadAllLists();
+    await reloadTasks();
     close();
   }
 
   async function toggleCompleted(task) {
     const taskService = new FirebaseTaskService();
     await taskService.toggleTaskCompleted(task);
-    loadAllLists();
+    await loadAllLists();
+    await reloadTasks();
   }
 
-  if (
-    (activeList && activeList.taskCount === 0) ||
-    (!activeList && tasks.length === 0)
-  ) {
+  if (tasks.length === 0) {
     return <p className={styles.emptyState}>No To-Dos Yet</p>;
   }
 

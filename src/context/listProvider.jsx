@@ -23,7 +23,6 @@ export const ListProvider = ({ children }) => {
         setActiveList(null); // If no list is active, show all tasks in the taskList component
         return;
       }
-
       // If a list is active (on reload for example), show all tasks within that list
       const updatedActive = results.find((list) => list.id === activeList.id);
 
@@ -61,6 +60,7 @@ export const ListProvider = ({ children }) => {
         loadAllLists,
         activeList,
         lists,
+        
       }}
     >
       {children}

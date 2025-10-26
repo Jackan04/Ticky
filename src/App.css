@@ -150,6 +150,10 @@ textarea {
   resize: none;
 }
 
+textarea{
+  min-height: 150px;
+}
+
 input::placeholder,
 textarea::placeholder {
   color: var(--subtext);

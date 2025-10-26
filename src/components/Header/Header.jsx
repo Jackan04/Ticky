@@ -2,6 +2,7 @@ import styles from "./Header.module.css";
 import ListIcon from "../../assets/icons/list.svg?react";
 import LightbulbIcon from "../../assets/icons/lightbulb.svg?react";
 import LightbulbFilledIcon from "../../assets/icons/lightbulb-full.svg?react";
+import InboxIcon from "../../assets/icons/inbox.svg?react";
 import PlusIcon from "../../assets/icons/plus.svg?react";
 import { useTheme } from "../../context/themeProvider";
 import Button from "../Button/Button";
@@ -32,8 +33,8 @@ export default function Header() {
       <Button
         className={styles.listButton}
         variant="transparent"
-        text={activeList?.name ?? "All Tasks"}
-        icon={<ListIcon className={`icon ${styles.iconList}`} />}
+        text={activeList?.name ?? "All To-Dos"}
+        icon={activeList ? <ListIcon className={`icon ${styles.iconList}`}/> : <InboxIcon className={`icon ${styles.iconInbox}`} /> }
         onClick={() => open("listPicker")}
       ></Button>
       <div className={styles.controls}>

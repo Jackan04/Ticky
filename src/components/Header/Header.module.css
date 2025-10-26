@@ -21,8 +21,12 @@
   fill: var(--text-primary);
 }
 
-.listIcon {
+.iconList, .iconInbox {
   font-size: var(--font-heading);
+}
+
+.iconInbox{
+  fill: var(--blue-dark);
 }
 .iconPlus {
   fill: currentColor;

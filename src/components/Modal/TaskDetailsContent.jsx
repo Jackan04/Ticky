@@ -25,7 +25,7 @@ export default function TaskDetailsContent({ task, isEditing, onChange }) {
               type="date"
               disabled={!isEditing}
               className={styles.dueDate}
-              value={task.dueDate || "No due date"}
+              value={task.dueDate}
               onChange={(e) => onChange({ ...task, dueDate: e.target.value })}
             ></input>
           </div>
@@ -35,7 +35,8 @@ export default function TaskDetailsContent({ task, isEditing, onChange }) {
               type="date"
               disabled={!isEditing}
               className={styles.notes}
-              value={task.notes || "No notes"}
+              value={task.notes || ""}
+              placeholder={task.notes || "No notes"}
               onChange={(e) => onChange({ ...task, notes: e.target.value })}
             ></textarea>
           </div>

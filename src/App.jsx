@@ -16,7 +16,7 @@ function AppContent() {
     <div className="App">
       <Header></Header>
       <TaskInput />
-      <StatsList></StatsList>
+      {/* <StatsList></StatsList> */}
       <TaskList></TaskList>
      
     </div>

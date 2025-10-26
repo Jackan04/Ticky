@@ -24,20 +24,24 @@ export default function TaskList() {
   }, [modalData]);
 
   useEffect(() => {
-    if (!activeList) {
-      setTasks([]);
-      return;
-    }
-
     const taskService = new FirebaseTaskService();
 
-    async function load() {
-      const results = await taskService.getTasksByList(activeList.id);
-      setTasks(results || []);
+    async function loadAllTasks() {
+      const allTasks = await taskService.getAllTasks();
+      setTasks(allTasks);
     }
 
-    load();
-  }, [activeList, getActiveList]);
+    async function load() {
+      const resultsByList = await taskService.getTasksByList(activeList.id);
+      setTasks(resultsByList || []);
+    }
+
+    if (!activeList) {
+      loadAllTasks();
+    } else {
+      load();
+    }
+  }, [activeList]);
 
   async function handleDeleteTask(task) {
     if (!task?.id) return;
@@ -71,7 +75,10 @@ export default function TaskList() {
     loadAllLists();
   }
 
-  if (!activeList || activeList.taskCount === 0) {
+  if (
+    (activeList && activeList.taskCount === 0) ||
+    (!activeList && tasks.length === 0)
+  ) {
     return <p className={styles.emptyState}>No To-Dos Yet</p>;
   }
 

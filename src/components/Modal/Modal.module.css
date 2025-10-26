@@ -63,6 +63,18 @@
 }
 
 /* List Picker Content */
+.listPickerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.lists {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
 .listPicker {
   display: flex;
   flex-direction: column;
@@ -98,6 +110,10 @@
   display: flex;
   align-items: center;
   gap: var(--space-4);
+}
+
+.iconInbox{
+  fill: var(--blue-dark);
 }
 
 .iconTrash {

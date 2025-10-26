@@ -16,11 +16,11 @@ export const ListProvider = ({ children }) => {
 
     try {
       const results = await listService.getAllLists();
-      results.sort((a, b) => (a.name || "").localeCompare(b.name || "")); // Sort lists by name
+      results.sort((a, b) => (a.name || "").localeCompare(b.name || "")); 
       setLists(results);
 
       if (!activeList && results.length) {
-        setActiveList(results[0]);
+        setActiveList(null);
       }
     } catch (error) {
       console.error("Failed to load lists: ", error);
@@ -35,7 +35,7 @@ export const ListProvider = ({ children }) => {
   }, []);
 
   function toggleActiveList(list) {
-    setActiveList(list || lists[0]);
+    setActiveList(list || null);
   }
 
   function getActiveList() {

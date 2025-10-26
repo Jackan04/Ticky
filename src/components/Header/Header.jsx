@@ -32,7 +32,7 @@ export default function Header() {
       <Button
         className={styles.listButton}
         variant="transparent"
-        text={activeList?.name ?? "Lists"}
+        text={activeList?.name ?? "All Tasks"}
         icon={<ListIcon className={`icon ${styles.iconList}`} />}
         onClick={() => open("listPicker")}
       ></Button>

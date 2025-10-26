@@ -57,8 +57,8 @@ export class FirebaseTaskService {
 
   async addTask(task) {
     try {
-      const taskRef = await addDoc(this.tasksRef, task);
-      console.log("Document written: ", taskRef);
+      const newTask = await addDoc(this.tasksRef, task);
+      console.log("Document written: ", newTask);
     } catch (error) {
       console.error("Error adding task:", error);
       throw error;

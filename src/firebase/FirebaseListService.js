@@ -35,7 +35,16 @@ export default class FirebaseListService {
 
   async updateList() {}
 
-  async addList() {}
+  async addList(list) {
+    try {
+      const newList = { name: list.name, taskCount: 0, createdAt: Date.now() };
+
+      await addDoc(this.listsRef, newList);
+      console.log("New list added: ", newList);
+    } catch (error) {
+      console.error("Error adding list:", error);
+    }
+  }
 
   async deleteList() {}
 }

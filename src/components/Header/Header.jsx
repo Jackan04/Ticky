@@ -4,19 +4,28 @@ import LightbulbIcon from "../../assets/icons/lightbulb.svg?react";
 import LightbulbFilledIcon from "../../assets/icons/lightbulb-full.svg?react";
 import PlusIcon from "../../assets/icons/plus.svg?react";
 import { useTheme } from "../../context/themeProvider";
-
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
 import ListPickerContent from "../Modal/ListPickerContent.jsx";
 import NewListContent from "../Modal/NewListContent";
 import { useModal } from "../../context/modalProvider.jsx";
 import { useList } from "../../context/listProvider.jsx";
-import { useEffect } from "react";
+import FirebaseListService from "../../firebase/FirebaseListService.js";
+import { useState } from "react";
 
 export default function Header() {
   const { toggleTheme, darkMode } = useTheme();
-  const { open, close, activeModal } = useModal();
-  const { activeList } = useList();
+  const { open, close, activeModal, modalData } = useModal();
+  const { activeList, loadAllLists } = useList();
+  const [newList, setNewList] = useState("");
+
+  async function handleNewList() {
+    const listService = new FirebaseListService();
+    await listService.addList(newList);
+    setNewList("");
+    close();
+    loadAllLists();
+  }
 
   return (
     <div className={styles.container}>
@@ -64,8 +73,9 @@ export default function Header() {
         onClose={close}
         title="New List"
         buttonText="Save"
+        onClick={() => handleNewList(newList)}
       >
-        <NewListContent></NewListContent>
+        <NewListContent onChange={setNewList}></NewListContent>
       </Modal>
     </div>
   );

@@ -4,7 +4,6 @@ export default function mapFirebaseList(doc) {
   const list = {
     id: doc.id,
     name: data.name,
-    taskCount: typeof data.taskCount === "number" ? data.taskCount : 0,
   };
 
   return list;

@@ -10,7 +10,7 @@ import { useList } from "../../context/listProvider";
 
 export default function TaskList() {
   const { close, activeModal, modalData } = useModal();
-  const { getActiveList, activeList, decrementTaskCount, loadAllLists } =
+  const { activeList, loadAllLists } =
     useList();
   const [tasks, setTasks] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
@@ -49,7 +49,6 @@ export default function TaskList() {
     try {
       await taskService.deleteTask(task);
       close();
-      await decrementTaskCount();
       await loadAllLists();
     } catch (error) {
       console.error("Failed to delete task", error);

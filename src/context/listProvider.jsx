@@ -53,26 +53,12 @@ export const ListProvider = ({ children }) => {
     return activeList;
   }
 
-  async function incrementTaskCount() {
-    const listService = new FirebaseListService();
-    await listService.updateTaskCount(activeList.id, 1);
-    activeList.taskCount++;
-  }
-
-  async function decrementTaskCount() {
-    const listService = new FirebaseListService();
-    await listService.updateTaskCount(activeList.id, -1);
-    activeList.taskCount--;
-  }
-
   return (
     <ListContext.Provider
       value={{
         toggleActiveList,
         getActiveList,
         loadAllLists,
-        incrementTaskCount,
-        decrementTaskCount,
         activeList,
         lists,
       }}

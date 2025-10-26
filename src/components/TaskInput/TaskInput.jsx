@@ -11,7 +11,7 @@ import { FirebaseTaskService } from "../../firebase/FirebaseTaskService.js";
 
 export default function TaskInput() {
   const { open, close, activeModal } = useModal();
-  const { activeList, loadAllLists, incrementTaskCount } = useList();
+  const { activeList, loadAllLists } = useList();
   const [inputTitle, setInputTitle] = useState("");
   const [dueDate, setDueDate] = useState(null);
   const [notes, setNotes] = useState("");
@@ -43,7 +43,6 @@ export default function TaskInput() {
     setDueDate(null);
     setNotes("");
     close();
-    await incrementTaskCount(); // firebaseListService => listProvider => TaskInput
   }
 
   return (

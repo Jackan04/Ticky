@@ -21,7 +21,6 @@ export default function ListPicker() {
     const listService = new FirebaseListService();
     await listService.deleteList(list);
     loadAllLists();
-    toggleActiveList();
   }
 
   return (

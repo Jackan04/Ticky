@@ -16,10 +16,21 @@ export const ListProvider = ({ children }) => {
 
     try {
       const results = await listService.getAllLists();
-      results.sort((a, b) => (a.name || "").localeCompare(b.name || "")); 
+      results.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
       setLists(results);
 
-      if (!activeList && results.length) {
+      if (!activeList) {
+        setActiveList(null); // If no list is active, show all tasks in the taskList component
+        return;
+      }
+
+      // If a list is active (on reload for example), show all tasks within that list
+      const updatedActive = results.find((list) => list.id === activeList.id);
+
+      if (updatedActive) {
+        setActiveList(updatedActive);
+      } else {
+        // if the active list was deleted, fallback to view for all tasks in task list component
         setActiveList(null);
       }
     } catch (error) {
@@ -29,7 +40,7 @@ export const ListProvider = ({ children }) => {
 
   useEffect(() => {
     const load = async () => {
-      await loadAllLists();
+      await loadAllLists(); 
     };
     load();
   }, []);

@@ -13,6 +13,8 @@ export default function TaskInput() {
   const { open, close, activeModal } = useModal();
   const { activeList, loadAllLists, incrementTaskCount } = useList();
   const [inputTitle, setInputTitle] = useState("");
+  const [dueDate, setDueDate] = useState(null);
+  const [notes, setNotes] = useState("");
 
   function handleInputChange(event) {
     setInputTitle(event.target.value);
@@ -26,8 +28,8 @@ export default function TaskInput() {
       listId: activeList.id,
       title: inputTitle.trim(),
       completed: false,
-      dueDate: null,
-      notes: "",
+      dueDate: dueDate || null,
+      notes: notes || "",
     };
 
     try {
@@ -38,6 +40,9 @@ export default function TaskInput() {
 
     loadAllLists();
     setInputTitle("");
+    setDueDate(null);
+    setNotes("");
+    close();
     await incrementTaskCount(); // firebaseListService => listProvider => TaskInput
   }
 
@@ -69,12 +74,20 @@ export default function TaskInput() {
       </div>
 
       <Modal
+        onClick={handleAddTask}
         isOpen={activeModal === "newTask"}
         onClose={close}
         title="New To-Do"
         buttonText="Save"
       >
-        <NewTaskContent inputTitle={inputTitle}></NewTaskContent>
+        <NewTaskContent
+          title={inputTitle}
+          onTitleChange={(value) => setInputTitle(value)}
+          dueDate={dueDate}
+          onDueDateChange={(value) => setDueDate(value)}
+          notes={notes}
+          onNotesChange={(value) => setNotes(value)}
+        />
       </Modal>
     </div>
   );

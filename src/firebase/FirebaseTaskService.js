@@ -27,7 +27,22 @@ export class FirebaseTaskService {
 
   async getTask() {}
 
-  async updateTask() {}
+  async updateTask(task) {
+    const tasksDocRef = doc(db, "tasks", task.id);
+    try {
+      const updatedTask = await updateDoc(tasksDocRef, {
+        title: task.title,
+        dueDate: task.dueDate,
+        notes: task.notes,
+        completed: task.completed,
+        listId: task.listId,
+        createdAt: Date.now(),
+      });
+      console.log("Document updated: ", updatedTask);
+    } catch (error) {
+      console.error("Error updating task:", error);
+    }
+  }
 
   async addTask(task) {
     try {
@@ -41,7 +56,7 @@ export class FirebaseTaskService {
 
   async deleteTask(task) {
     try {
-       await deleteDoc(doc(this.tasksRef, task.id));
+      await deleteDoc(doc(this.tasksRef, task.id));
     } catch (error) {
       console.error("Error deleting task:", error);
     }

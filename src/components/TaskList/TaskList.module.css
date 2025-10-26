@@ -14,8 +14,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--border-dark);
+  /* border-bottom: 1px solid var(--border-dark); */
   padding: 0.625rem 0;
+}
+
+.task .hide {
+  display: none;
+}
+
+.task:hover .hide {
+  display: inline-flex;
 }
 
 .text {

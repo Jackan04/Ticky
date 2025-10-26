@@ -38,7 +38,7 @@ export default function TaskItem({ task }) {
         </span>
       </div>
 
-      <div className={styles.controlsRight}>
+      <div className={`${styles.controlsRight} ${styles.hide}`}>
         <Button
           text={<EllipsisIcon className={`icon ${styles.iconEllipsis} `} />}
           variant="transparent"

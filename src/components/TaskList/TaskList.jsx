@@ -13,6 +13,14 @@ export default function TaskList() {
   const { getActiveList, activeList, decrementTaskCount, loadAllLists } =
     useList();
   const [tasks, setTasks] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedTask, setEditedTask] = useState(null);
+
+  useEffect(() => {
+    if (modalData) {
+      setEditedTask(modalData);
+    }
+  }, [modalData]);
 
   useEffect(() => {
     if (!activeList) {
@@ -37,12 +45,24 @@ export default function TaskList() {
     try {
       await taskService.deleteTask(task);
       close();
-      setTasks((prev) => prev.filter((t) => t.id !== task.id));
       await decrementTaskCount();
       await loadAllLists();
     } catch (error) {
       console.error("Failed to delete task", error);
     }
+  }
+
+  async function handleUpdateTask() {
+    const taskService = new FirebaseTaskService();
+    if (!isEditing) {
+      setIsEditing(true);
+      return;
+    }
+
+    await taskService.updateTask(editedTask);
+    setIsEditing(false);
+    loadAllLists();
+    close();
   }
 
   if (!activeList || activeList.taskCount === 0) {
@@ -61,10 +81,17 @@ export default function TaskList() {
       <Modal
         isOpen={activeModal === "taskDetails"}
         onClose={close}
-        title="Task Details"
-        buttonText="Edit"
+        title={isEditing ? "Edit Task" : "Task Details"}
+        buttonText={isEditing ? "Save" : "Edit"}
+        onClick={handleUpdateTask}
       >
-        {modalData && <TaskDetailsContent task={modalData} />}
+        {modalData && (
+          <TaskDetailsContent
+            task={editedTask}
+            isEditing={isEditing}
+            onChange={setEditedTask}
+          />
+        )}
       </Modal>
 
       <Modal

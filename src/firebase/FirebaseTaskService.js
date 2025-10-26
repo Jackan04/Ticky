@@ -6,6 +6,8 @@ import {
   getDocs,
   updateDoc,
   deleteDoc,
+  query,
+  where,
   doc,
 } from "firebase/firestore";
 
@@ -20,7 +22,19 @@ export class FirebaseTaskService {
       const tasks = results.docs.map((doc) => mapFirebaseTask(doc));
       return tasks;
     } catch (error) {
-      console.error("Error getting tasks:", error);
+      console.error("Error getting all tasks:", error);
+      throw error;
+    }
+  }
+
+  async getTasksByList(listId) {
+    try {
+      const q = query(this.tasksRef, where("listId", "==", listId));
+      const results = await getDocs(q);
+      const tasks = results.docs.map((doc) => mapFirebaseTask(doc));
+      return tasks;
+    } catch (error) {
+      console.error("Error getting tasks by list:", error);
       throw error;
     }
   }

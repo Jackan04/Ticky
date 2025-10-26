@@ -153,7 +153,6 @@ select {
 
 select {
   cursor: pointer;
-  
 }
 
 textarea {
@@ -242,3 +241,4 @@ li {
   font-size: var(--font-subtext);
   color: var(--subtext);
 }
+

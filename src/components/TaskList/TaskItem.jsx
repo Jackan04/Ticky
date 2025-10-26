@@ -5,7 +5,7 @@ import TrashIcon from "../../assets/icons/trash.svg?react";
 import Button from "../Button/Button";
 import { useModal } from "../../context/modalProvider.jsx";
 
-export default function TaskItem({ task, onClick }) {
+export default function TaskItem({ task, onClick, listName }) {
   const { open } = useModal();
 
   function handleOpenDetails() {
@@ -30,13 +30,16 @@ export default function TaskItem({ task, onClick }) {
           variant="transparent"
           onClick={onClick}
         />
-        <span
-          className={`body ${styles.text} ${
-            task.completed ? styles.completed : ""
-          }`}
-        >
-          {task.title}
-        </span>
+        <div className={`subText ${styles.textContainer}`}>
+          <span
+            className={`body ${styles.text} ${
+              task.completed ? styles.completed : ""
+            }`}
+          >
+            {task.title}
+          </span>
+          <span>{listName}</span>
+        </div>
       </div>
 
       <div className={`${styles.controlsRight} ${styles.hide}`}>

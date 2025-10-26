@@ -10,7 +10,7 @@ import { useList } from "../../context/listProvider";
 
 export default function TaskList() {
   const { close, activeModal, modalData } = useModal();
-  const { activeList, loadAllLists } = useList();
+  const { activeList, loadAllLists, lists } = useList();
   const [tasks, setTasks] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState(null);
@@ -28,6 +28,11 @@ export default function TaskList() {
       setEditedTask(modalData);
     }
   }, [modalData]);
+
+  function getListNameById(listId) {
+    const match = lists.find((list) => list.id === listId);
+    return match ? match.name : "";
+  }
 
   async function reloadTasks() {
     const taskService = new FirebaseTaskService();
@@ -86,6 +91,7 @@ export default function TaskList() {
           <TaskItem
             key={task.id}
             task={task}
+            listName={getListNameById(task.listId)}
             onClick={() => toggleCompleted(task)}
           />
         ))}

@@ -27,6 +27,11 @@
   display: inline-flex;
 }
 
+.textContainer {
+  display: inline-flex;
+  flex-direction: column;
+}
+
 .text {
   color: var(--text-primary);
   word-break: break-word;

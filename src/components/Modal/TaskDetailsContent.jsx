@@ -1,10 +1,23 @@
 import CalendarIcon from "../../assets/icons/calendar.svg?react";
 import CheckBoxIcon from "../../assets/icons/check-box.svg?react";
 import NoteIcon from "../../assets/icons/note.svg?react";
-import Button from "../Button/Button";
+import ListIcon from "../../assets/icons/list.svg?react";
+import { useState, useEffect } from "react";
+import FirebaseListService from "../../firebase/FirebaseListService";
 import styles from "./Modal.module.css";
 
 export default function TaskDetailsContent({ task, isEditing, onChange }) {
+  const [lists, setLists] = useState([]);
+
+  useEffect(() => {
+    loadLists();
+  }, []);
+
+  async function loadLists() {
+    const listService = new FirebaseListService();
+    const results = await listService.getAllLists();
+    setLists(results);
+  }
   return (
     <div className={styles.taskDetailsContent}>
       {task && (
@@ -28,6 +41,28 @@ export default function TaskDetailsContent({ task, isEditing, onChange }) {
               value={task.dueDate}
               onChange={(e) => onChange({ ...task, dueDate: e.target.value })}
             ></input>
+          </div>
+          <div className={styles.inputGroup}>
+            <ListIcon className="icon" />
+            <select
+              disabled={!isEditing}
+              value={task.listId || ""}
+              onChange={(e) => {
+                onChange({
+                  ...task,
+                  listId: e.target.value,
+                });
+              }}
+            >
+              <option value="" disabled>
+                Choose a List
+              </option>
+              {lists.map((l) => (
+                <option key={l.id} value={l.id}>
+                  {l.name}
+                </option>
+              ))}
+            </select>
           </div>
           <div className={styles.inputGroup}>
             <NoteIcon className="icon" />

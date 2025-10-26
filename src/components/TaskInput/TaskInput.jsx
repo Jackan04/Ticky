@@ -14,10 +14,11 @@ export default function TaskInput() {
   const { activeList, loadAllLists } = useList();
   const [inputTitle, setInputTitle] = useState("");
   const [dueDate, setDueDate] = useState(null);
+  const [list, setList] = useState("");
   const [notes, setNotes] = useState("");
 
   function handleInputChange(event) {
-    setInputTitle(event.target.value);
+    setInputTitle(event.target.value); // If isn't using detailed view for adding a new task
   }
 
   async function handleAddTask() {
@@ -25,7 +26,13 @@ export default function TaskInput() {
     if (!inputTitle.trim()) return;
 
     const newTask = {
-      listId: activeList.id,
+      // listId: activeList.id ?? list.id,
+      listId:
+        activeList && activeList.id
+          ? activeList.id
+          : list && list.id
+          ? list.id
+          : null,
       title: inputTitle.trim(),
       completed: false,
       dueDate: dueDate || null,
@@ -84,6 +91,8 @@ export default function TaskInput() {
           onTitleChange={(value) => setInputTitle(value)}
           dueDate={dueDate}
           onDueDateChange={(value) => setDueDate(value)}
+          list={list}
+          onListChange={(value) => setList(value)}
           notes={notes}
           onNotesChange={(value) => setNotes(value)}
         />

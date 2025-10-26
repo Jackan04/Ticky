@@ -136,7 +136,8 @@ body {
 }
 
 input,
-textarea {
+textarea,
+select {
   padding: var(--space-3);
   display: flex;
   align-items: center;
@@ -150,13 +151,26 @@ textarea {
   resize: none;
 }
 
-textarea{
+select {
+  cursor: pointer;
+  
+}
+
+textarea {
   min-height: 150px;
 }
 
 input::placeholder,
-textarea::placeholder {
+textarea::placeholder,
+select::placeholder {
   color: var(--subtext);
+}
+
+input:focus,
+textarea:focus,
+button:focus,
+select:focus {
+  outline: none;
 }
 
 /* Date input styling */
@@ -197,12 +211,6 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
 li,
 ul {
   list-style: none;
-}
-
-input:focus,
-textarea:focus,
-button:focus {
-  outline: none;
 }
 
 .icon {

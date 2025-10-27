@@ -8,11 +8,18 @@ import { useModal } from "../../context/modalProvider";
 import { FirebaseTaskService } from "../../firebase/FirebaseTaskService";
 import { useList } from "../../context/listProvider";
 import { useTask } from "../../context/taskProvider";
+import Button from "../Button/Button";
 
 export default function TaskList() {
   const { close, activeModal, modalData } = useModal();
   const { activeList, loadAllLists, lists } = useList();
-  const { tasks, loadAllTasks } = useTask();
+  const {
+    tasks,
+    loadAllTasks,
+    toggleCompleted,
+    toggleHideCompleted,
+    hideCompleted,
+  } = useTask();
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState(null);
 
@@ -32,8 +39,6 @@ export default function TaskList() {
     const match = lists.find((list) => list.id === listId);
     return match ? match.name : "";
   }
-
-  // TaskProvider now owns loading tasks; TaskList consumes `tasks` from that provider.
 
   async function handleDeleteTask(task) {
     if (!task?.id) return;
@@ -62,13 +67,6 @@ export default function TaskList() {
     close();
   }
 
-  async function toggleCompleted(task) {
-    const taskService = new FirebaseTaskService();
-    await taskService.toggleTaskCompleted(task);
-    await loadAllLists();
-    await loadAllTasks();
-  }
-
   if (!tasks || tasks.length === 0) {
     return <p className={styles.emptyState}>No To-Dos Yet</p>;
   }
@@ -85,6 +83,15 @@ export default function TaskList() {
           />
         ))}
       </ul>
+      <Button
+        variant="default"
+        text={hideCompleted ? "Show Completed" : "Hide Completed"}
+        onClick={
+          activeList
+            ? () => toggleHideCompleted(activeList.id)
+            : () => toggleHideCompleted()
+        }
+      ></Button>
 
       {/* Single modal for all task details */}
       <Modal

@@ -10,7 +10,7 @@ export default function ActionConfirmContent({
   return (
     <div className={styles.confirmActionContent}>
       <div className={styles.top}>
-        <p className="subText">{subText}</p>
+        <p className="body">{subText}</p>
       </div>
       <Button text={action} variant="danger" onClick={onClick}></Button>
     </div>

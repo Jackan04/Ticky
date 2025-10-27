@@ -72,7 +72,7 @@ export default function TaskList() {
       <div className={styles.emptyState}>
         <p className={styles.emptyStateText}>No To-Dos Yet</p>
         <Button
-          variant="default"
+          variant="transparent"
           text={hideCompleted ? "Show Completed" : "Hide Completed"}
           onClick={
             activeList

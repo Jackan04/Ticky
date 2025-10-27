@@ -27,9 +27,11 @@ export function TaskProvider({ children }) {
       if (!activeList) {
         const allTasks = await taskService.getAllTasks();
         setTasks(allTasks);
+        sethideCompleted(false);
       } else {
         const resultsByList = await taskService.getTasksByList(activeList.id);
         setTasks(resultsByList || []);
+        sethideCompleted(false);
       }
     } catch (error) {
       console.error("Failed to load tasks: ", error);
@@ -43,18 +45,6 @@ export function TaskProvider({ children }) {
     await loadAllTasks();
   }
 
-  //   async function hideCompleted(listId) {
-  //     const taskService = new FirebaseTaskService();
-  //     if (!activeList) {
-  //       const allTasks = await taskService.getAllTasks();
-  //       const notCompleted = allTasks.filter((task) => task.completed !== true);
-  //       setTasks(notCompleted);
-  //     } else {
-  //       const allTasks = await taskService.getTasksByList(listId);
-  //       const notCompleted = allTasks.filter((task) => task.completed !== true);
-  //       setTasks(notCompleted);
-  //     }
-  //   }
   async function toggleHideCompleted(listId) {
     const taskService = new FirebaseTaskService();
     if (!hideCompleted) {
@@ -62,7 +52,7 @@ export function TaskProvider({ children }) {
         const results = await taskService.getAllTasks();
         const notCompleted = results.filter((task) => task.completed !== true);
         setTasks(notCompleted);
-        sethideCompleted(true)
+        sethideCompleted(true);
       } else {
         const results = await taskService.getTasksByList(listId);
         const notCompleted = results.filter((task) => task.completed !== true);

@@ -68,7 +68,20 @@ export default function TaskList() {
   }
 
   if (!tasks || tasks.length === 0) {
-    return <p className={styles.emptyState}>No To-Dos Yet</p>;
+    return (
+      <div className={styles.emptyState}>
+        <p className={styles.emptyStateText}>No To-Dos Yet</p>
+        <Button
+          variant="default"
+          text={hideCompleted ? "Show Completed" : "Hide Completed"}
+          onClick={
+            activeList
+              ? () => toggleHideCompleted(activeList.id)
+              : () => toggleHideCompleted()
+          }
+        ></Button>
+      </div>
+    );
   }
 
   return (

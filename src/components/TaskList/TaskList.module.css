@@ -5,8 +5,16 @@
 }
 
 .emptyState {
+  display: flex;
+  flex-direction: column;
   align-self: center;
+  gap: var(--space-5);
+}
+
+.emptyStateText {
+  text-align: center;
   color: var(--subtext);
+
 }
 
 /* Task Item */

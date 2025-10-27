@@ -8,6 +8,7 @@ import { useTheme } from "../../context/themeProvider";
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
 import ListPickerContent from "../Modal/ListPickerContent.jsx";
+import ActionModal from "../Modal/ActionModal.jsx";
 import NewListContent from "../Modal/NewListContent";
 import { useModal } from "../../context/modalProvider.jsx";
 import { useList } from "../../context/listProvider.jsx";
@@ -28,13 +29,26 @@ export default function Header() {
     loadAllLists();
   }
 
+  async function handleDeleteList(list) {
+    const listService = new FirebaseListService();
+    await listService.deleteList(list);
+    close();
+    await loadAllLists();
+  }
+
   return (
     <div className={styles.container}>
       <Button
         className={styles.listButton}
         variant="transparent"
         text={activeList?.name ?? "All To-Dos"}
-        icon={activeList ? <ListIcon className={`icon ${styles.iconList}`}/> : <InboxIcon className={`icon ${styles.iconInbox}`} /> }
+        icon={
+          activeList ? (
+            <ListIcon className={`icon ${styles.iconList}`} />
+          ) : (
+            <InboxIcon className={`icon ${styles.iconInbox}`} />
+          )
+        }
         onClick={() => open("listPicker")}
       ></Button>
       <div className={styles.controls}>
@@ -68,6 +82,17 @@ export default function Header() {
       >
         <ListPickerContent />
       </Modal>
+
+      <ActionModal
+        isOpen={activeModal === "confirmDeleteList"}
+        onClose={close}
+        title="Confirm Deletion"
+        action="Delete"
+        subText={
+          "Deleting this list will remove it permanently. To-Dos within the list will not be deleted."
+        }
+        onConfirm={() => handleDeleteList(modalData)}
+      />
 
       <Modal
         isOpen={activeModal === "newList"}

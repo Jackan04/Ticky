@@ -12,6 +12,7 @@ export function ModalProvider({ children }) {
 
   function open(name, data = null) {
     setActiveModal(name);
+    console.log("Active modal: ", activeModal);
     setModalData(data);
   }
 

@@ -3,6 +3,7 @@ import TaskItem from "./TaskItem";
 import Modal from "../Modal/Modal";
 import TaskDetailsContent from "../Modal/TaskDetailsContent";
 import ActionConfirmContent from "../Modal/ActionConfirmContent";
+import ActionModal from "../Modal/ActionModal";
 import { useEffect, useState } from "react";
 import { useModal } from "../../context/modalProvider";
 import { FirebaseTaskService } from "../../firebase/FirebaseTaskService";
@@ -53,7 +54,8 @@ export default function TaskList() {
   if (!tasks || tasks.length === 0) {
     return (
       <div className={styles.emptyState}>
-        <p className={styles.emptyStateText}>No To-Dos Yet</p>
+        <p className={styles.emptyStateText}>No To-Dos to display</p>
+
         <Button
           variant="transparent"
           text={hideCompleted ? "Show Completed" : "Hide Completed"}
@@ -108,17 +110,16 @@ export default function TaskList() {
         )}
       </Modal>
 
-      <Modal
-        isOpen={activeModal === "confirmDelete"}
+      <ActionModal
+        isOpen={activeModal === "confirmDeleteTask"}
         onClose={close}
         title="Confirm Deletion"
-      >
-        <ActionConfirmContent
-          action="Delete"
-          subText="Deleting this task will completely remove it, and you won’t be able to restore it."
-          onClick={() => handleDeleteTask(modalData)}
-        />
-      </Modal>
+        action="Delete"
+        subText={
+          "Deleting this task will completely remove it, and you won’t be able to restore it."
+        }
+        onConfirm={() => handleDeleteTask(modalData)}
+      />
     </div>
   );
 }

@@ -19,6 +19,7 @@
 
 /* Button Variants */
 .transparent {
+  color: var(--text-primary);
   background-color: transparent;
   box-shadow: none;
   padding: 0;

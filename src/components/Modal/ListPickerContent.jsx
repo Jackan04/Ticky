@@ -7,20 +7,26 @@ import Button from "../Button/Button";
 import { useList } from "../../context/listProvider.jsx";
 import { useModal } from "../../context/modalProvider.jsx";
 import FirebaseListService from "../../firebase/FirebaseListService.js";
+import ActionModal from "./ActionModal.jsx";
 
 export default function ListPicker() {
   const { toggleActiveList, lists, loadAllLists } = useList();
-  const { close } = useModal();
+  const { open, close, activeModal, modalData } = useModal();
 
   function handleClick(list) {
     toggleActiveList(list);
     close();
   }
 
-  async function handleDelete(list) {
+  function handleOpenDelete(list) {
+    open("confirmDeleteList", list);
+  }
+
+  async function handleDeleteList(list) {
     const listService = new FirebaseListService();
     await listService.deleteList(list);
-    loadAllLists();
+    await loadAllLists();
+    close();
   }
 
   return (
@@ -28,10 +34,7 @@ export default function ListPicker() {
       <div className={styles.lists}>
         <p className="subText">Views</p>
         <ul className={styles.listPicker}>
-          <li
-            className={styles.list}
-            onClick={() => handleClick()}
-          >
+          <li className={styles.list} onClick={() => handleClick()}>
             <div className={styles.controlsLeft}>
               <InboxIcon className={`icon ${styles.iconInbox}`} />
               <p>All To-Dos</p>
@@ -63,13 +66,18 @@ export default function ListPicker() {
                 <Button
                   text={<TrashIcon className={`icon ${styles.iconTrash} `} />}
                   variant="transparent"
-                  onClick={() => handleDelete(list)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleOpenDelete(list);
+                  }}
                 />
               </div>
             </li>
           ))}
         </ul>
       </div>
+
+      {/* Confirmation modal for deleting a list is rendered at the (Header) to avoid nested stacking issues */}
     </div>
   );
 }

@@ -13,7 +13,7 @@ export default function TaskItem({ task, onClick, listName }) {
   }
 
   function handleOpenDelete() {
-    open("confirmDelete", task);
+    open("confirmDeleteTask", task);
   }
 
   return (
@@ -51,7 +51,10 @@ export default function TaskItem({ task, onClick, listName }) {
         <Button
           text={<TrashIcon className={`icon ${styles.iconTrash} `} />}
           variant="transparent"
-          onClick={handleOpenDelete}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleOpenDelete(task);
+          }}
         />
       </div>
     </li>

@@ -1,5 +1,4 @@
 import styles from "./Modal.module.css";
-import ExclamationIcon from "../../assets/icons/exclamation.svg?react";
 import Button from "../Button/Button";
 
 export default function ActionConfirmContent({

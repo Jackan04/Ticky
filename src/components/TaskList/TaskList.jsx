@@ -85,7 +85,7 @@ export default function TaskList() {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <ul className={styles.list}>
         {tasks.map((task) => (
           <TaskItem
@@ -96,8 +96,10 @@ export default function TaskList() {
           />
         ))}
       </ul>
+
       <Button
-        variant="default"
+        className={styles.btnHideCompleted}
+        variant="transparent"
         text={hideCompleted ? "Show Completed" : "Hide Completed"}
         onClick={
           activeList

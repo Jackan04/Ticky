@@ -1,4 +1,12 @@
 /* Task List */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-5);
+}
+
 .list {
   width: 100%;
   align-self: stretch;
@@ -14,7 +22,6 @@
 .emptyStateText {
   text-align: center;
   color: var(--subtext);
-
 }
 
 /* Task Item */

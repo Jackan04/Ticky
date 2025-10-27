@@ -8,6 +8,7 @@ import NewTaskContent from "../Modal/NewTaskContent.jsx";
 import { useModal } from "../../context/modalProvider.jsx";
 import { useList } from "../../context/listProvider.jsx";
 import { FirebaseTaskService } from "../../firebase/FirebaseTaskService.js";
+import { useTask } from "../../context/taskProvider.jsx";
 
 export default function TaskInput() {
   const { open, close, activeModal } = useModal();
@@ -16,9 +17,10 @@ export default function TaskInput() {
   const [dueDate, setDueDate] = useState(null);
   const [list, setList] = useState("");
   const [notes, setNotes] = useState("");
+  const { tasks, loadAllTasks } = useTask();
 
   function handleInputChange(event) {
-    setInputTitle(event.target.value); // If isn't using detailed view for adding a new task
+    setInputTitle(event.target.value); // For passing current titleInput value from taskInput to the detailed view
   }
 
   async function handleAddTask() {
@@ -46,6 +48,7 @@ export default function TaskInput() {
     }
 
     loadAllLists();
+    loadAllTasks();
     setInputTitle("");
     setDueDate(null);
     setNotes("");

@@ -7,19 +7,18 @@ import { useEffect, useState } from "react";
 import { useModal } from "../../context/modalProvider";
 import { FirebaseTaskService } from "../../firebase/FirebaseTaskService";
 import { useList } from "../../context/listProvider";
+import { useTask } from "../../context/taskProvider";
 
 export default function TaskList() {
   const { close, activeModal, modalData } = useModal();
   const { activeList, loadAllLists, lists } = useList();
-  const [tasks, setTasks] = useState([]);
+  const { tasks, loadAllTasks } = useTask();
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState(null);
 
   useEffect(() => {
-    async function load() {
-      reloadTasks();
-    }
-    load();
+    // When activeList changes, ask the TaskProvider to reload tasks.
+    loadAllTasks();
   }, [activeList]);
 
   useEffect(() => {
@@ -34,17 +33,7 @@ export default function TaskList() {
     return match ? match.name : "";
   }
 
-  async function reloadTasks() {
-    const taskService = new FirebaseTaskService();
-
-    if (!activeList) {
-      const allTasks = await taskService.getAllTasks();
-      setTasks(allTasks);
-    } else {
-      const resultsByList = await taskService.getTasksByList(activeList.id);
-      setTasks(resultsByList || []);
-    }
-  }
+  // TaskProvider now owns loading tasks; TaskList consumes `tasks` from that provider.
 
   async function handleDeleteTask(task) {
     if (!task?.id) return;
@@ -52,7 +41,7 @@ export default function TaskList() {
     try {
       await taskService.deleteTask(task);
       await loadAllLists();
-      await reloadTasks();
+      await loadAllTasks();
       close();
     } catch (error) {
       console.error("Failed to delete task", error);
@@ -69,7 +58,7 @@ export default function TaskList() {
     await taskService.updateTask(editedTask);
     setIsEditing(false);
     await loadAllLists();
-    await reloadTasks();
+    await loadAllTasks();
     close();
   }
 
@@ -77,10 +66,10 @@ export default function TaskList() {
     const taskService = new FirebaseTaskService();
     await taskService.toggleTaskCompleted(task);
     await loadAllLists();
-    await reloadTasks();
+    await loadAllTasks();
   }
 
-  if (tasks.length === 0) {
+  if (!tasks || tasks.length === 0) {
     return <p className={styles.emptyState}>No To-Dos Yet</p>;
   }
 

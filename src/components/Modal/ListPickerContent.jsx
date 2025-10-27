@@ -22,13 +22,6 @@ export default function ListPicker() {
     open("confirmDeleteList", list);
   }
 
-  async function handleDeleteList(list) {
-    const listService = new FirebaseListService();
-    await listService.deleteList(list);
-    await loadAllLists();
-    close();
-  }
-
   return (
     <div className={styles.listPickerContainer}>
       <div className={styles.lists}>

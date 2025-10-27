@@ -3,11 +3,11 @@ import FirebaseListService from "../firebase/FirebaseListService";
 
 const ListContext = createContext();
 
-export const useList = () => {
+export function useList() {
   return useContext(ListContext);
-};
+}
 
-export const ListProvider = ({ children }) => {
+export function ListProvider({ children }) {
   const [lists, setLists] = useState([]);
   const [activeList, setActiveList] = useState(null);
 
@@ -39,7 +39,7 @@ export const ListProvider = ({ children }) => {
 
   useEffect(() => {
     const load = async () => {
-      await loadAllLists(); 
+      await loadAllLists();
     };
     load();
   }, []);
@@ -60,10 +60,9 @@ export const ListProvider = ({ children }) => {
         loadAllLists,
         activeList,
         lists,
-        
       }}
     >
       {children}
     </ListContext.Provider>
   );
-};
+}

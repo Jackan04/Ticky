@@ -2,16 +2,16 @@ import { useState, createContext, useContext, useEffect } from "react";
 
 const ThemeContext = createContext();
 
-export const useTheme = () => {
+export function useTheme() {
   return useContext(ThemeContext);
-};
+}
 
-export const ThemeProvider = ({ children }) => {
+export function ThemeProvider({ children }) {
   const [darkMode, setDarkMode] = useState(false);
 
-  const toggleTheme = () => {
+  function toggleTheme() {
     setDarkMode((mode) => !mode);
-  };
+  }
 
   useEffect(() => {
     document.documentElement.setAttribute(
@@ -25,4 +25,4 @@ export const ThemeProvider = ({ children }) => {
       {children}
     </ThemeContext.Provider>
   );
-};
+}

@@ -48,7 +48,7 @@
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 15px;
+  gap: var(--space-3);
 }
 
 /* New Task Content */
@@ -57,10 +57,6 @@
   flex-direction: column;
   gap: var(--space-4);
 }
-
-/* .newTaskContent .notes {
-  min-height: 140px;
-} */
 
 /* List Picker Content */
 .listPickerContainer {

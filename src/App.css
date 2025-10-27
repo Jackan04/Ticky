@@ -153,6 +153,9 @@ select {
 
 select {
   cursor: pointer;
+  appearance: none; /* removes native arrow (most browsers) */
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 textarea {
@@ -241,4 +244,3 @@ li {
   font-size: var(--font-subtext);
   color: var(--subtext);
 }
-

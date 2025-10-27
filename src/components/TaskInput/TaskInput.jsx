@@ -28,7 +28,7 @@ export default function TaskInput() {
     if (!inputTitle.trim()) return;
 
     const newTask = {
-      listId: list.id ? list.id : activeList.id ? activeList.id : null,
+      listId: list?.id ?? activeList?.id ?? null,
       title: inputTitle.trim(),
       completed: false,
       dueDate: dueDate || null,

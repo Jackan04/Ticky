@@ -1,5 +1,6 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { FirebaseTaskService } from "../firebase/FirebaseTaskService";
+import { useModal } from "./modalProvider";
 import { useList } from "./listProvider";
 
 const TaskContext = createContext();
@@ -11,7 +12,8 @@ export function useTask() {
 export function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
   const [hideCompleted, sethideCompleted] = useState(false);
-  const { activeList, loadAllLists } = useList();
+  const { activeList, loadAllLists, lists } = useList();
+  const { close } = useModal();
 
   useEffect(() => {
     const load = async () => {
@@ -38,6 +40,24 @@ export function TaskProvider({ children }) {
     }
   }
 
+  async function handleDeleteTask(task) {
+    if (!task?.id) return;
+    const taskService = new FirebaseTaskService();
+    try {
+      await taskService.deleteTask(task);
+      await loadAllLists();
+      await loadAllTasks();
+      close();
+    } catch (error) {
+      console.error("Failed to delete task", error);
+    }
+  }
+
+  function getListNameById(listId) {
+    const match = lists.find((list) => list.id === listId);
+    return match ? match.name : "";
+  }
+
   async function toggleCompleted(task) {
     const taskService = new FirebaseTaskService();
     await taskService.toggleTaskCompleted(task);
@@ -47,29 +67,19 @@ export function TaskProvider({ children }) {
 
   async function toggleHideCompleted(listId) {
     const taskService = new FirebaseTaskService();
-    if (!hideCompleted) {
-      if (!activeList) {
-        const results = await taskService.getAllTasks();
-        const notCompleted = results.filter((task) => task.completed !== true);
-        setTasks(notCompleted);
-        sethideCompleted(true);
-      } else {
-        const results = await taskService.getTasksByList(listId);
-        const notCompleted = results.filter((task) => task.completed !== true);
-        setTasks(notCompleted);
-        sethideCompleted(true);
-      }
-    } else {
-      if (!activeList) {
-        const results = await taskService.getAllTasks();
-        setTasks(results);
-        sethideCompleted(false);
-      } else {
-        const results = await taskService.getTasksByList(listId);
-        setTasks(results);
-        sethideCompleted(false);
-      }
-    }
+
+    const results = activeList
+      ? await taskService.getTasksByList(listId)
+      : await taskService.getAllTasks();
+
+    const nextHideCompleted = !hideCompleted;
+
+    const visibleTasks = nextHideCompleted
+      ? results.filter((task) => !task.completed)
+      : results;
+
+    setTasks(visibleTasks);
+    sethideCompleted(nextHideCompleted);
   }
 
   return (
@@ -80,6 +90,8 @@ export function TaskProvider({ children }) {
         loadAllTasks,
         toggleCompleted,
         toggleHideCompleted,
+        handleDeleteTask,
+        getListNameById,
       }}
     >
       {children}

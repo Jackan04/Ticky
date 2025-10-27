@@ -20,13 +20,13 @@ function AppContent() {
 export default function App() {
   return (
     <ThemeProvider>
-      <ListProvider>
-        <TaskProvider>
-          <ModalProvider>
+      <ModalProvider>
+        <ListProvider>
+          <TaskProvider>
             <AppContent />
-          </ModalProvider>
-        </TaskProvider>
-      </ListProvider>
+          </TaskProvider>
+        </ListProvider>
+      </ModalProvider>
     </ThemeProvider>
   );
 }

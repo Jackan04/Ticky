@@ -17,7 +17,7 @@ export default function TaskInput() {
   const [dueDate, setDueDate] = useState(null);
   const [list, setList] = useState("");
   const [notes, setNotes] = useState("");
-  const { tasks, loadAllTasks } = useTask();
+  const { loadAllTasks } = useTask();
 
   function handleInputChange(event) {
     setInputTitle(event.target.value); // For passing current titleInput value from taskInput to the detailed view
@@ -28,13 +28,7 @@ export default function TaskInput() {
     if (!inputTitle.trim()) return;
 
     const newTask = {
-      // listId: activeList.id ?? list.id,
-      listId:
-        activeList && activeList.id
-          ? activeList.id
-          : list && list.id
-          ? list.id
-          : null,
+      listId: list.id ? list.id : activeList.id ? activeList.id : null,
       title: inputTitle.trim(),
       completed: false,
       dueDate: dueDate || null,

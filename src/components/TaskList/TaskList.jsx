@@ -19,12 +19,13 @@ export default function TaskList() {
     toggleCompleted,
     toggleHideCompleted,
     hideCompleted,
+    handleDeleteTask,
+    getListNameById,
   } = useTask();
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState(null);
 
   useEffect(() => {
-    // When activeList changes, ask the TaskProvider to reload tasks.
     loadAllTasks();
   }, [activeList]);
 
@@ -34,24 +35,6 @@ export default function TaskList() {
       setEditedTask(modalData);
     }
   }, [modalData]);
-
-  function getListNameById(listId) {
-    const match = lists.find((list) => list.id === listId);
-    return match ? match.name : "";
-  }
-
-  async function handleDeleteTask(task) {
-    if (!task?.id) return;
-    const taskService = new FirebaseTaskService();
-    try {
-      await taskService.deleteTask(task);
-      await loadAllLists();
-      await loadAllTasks();
-      close();
-    } catch (error) {
-      console.error("Failed to delete task", error);
-    }
-  }
 
   async function handleUpdateTask() {
     const taskService = new FirebaseTaskService();

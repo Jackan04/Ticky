@@ -28,13 +28,13 @@ export function TaskProvider({ children }) {
     try {
       if (!activeList) {
         const allTasks = await taskService.getAllTasks();
-        await sortTasks(allTasks);
+        sortTasks(allTasks);
 
         setTasks(allTasks);
         sethideCompleted(false);
       } else {
         const resultsByList = await taskService.getTasksByList(activeList.id);
-        await sortTasks(allTasks);
+        sortTasks(resultsByList);
 
         setTasks(resultsByList);
         sethideCompleted(false);
@@ -44,17 +44,16 @@ export function TaskProvider({ children }) {
     }
   }
 
- async function sortTasks(tasks) {
-  // Sort tasks by completed and dueDate
-  // Tasks without a dueDate appears last in the list
-  return tasks.sort((a, b) => {
-    if (a.completed !== b.completed) return a.completed - b.completed;
-    if (!a.dueDate) return 1;
-    if (!b.dueDate) return -1;
-   return new Date(a.dueDate) - new Date(b.dueDate);
-  });
-}
-
+  async function sortTasks(tasks) {
+    // Sort tasks by completed and dueDate
+    // Tasks without a dueDate appears last in the list
+    return tasks.sort((a, b) => {
+      if (a.completed !== b.completed) return a.completed - b.completed;
+      if (!a.dueDate) return 1;
+      if (!b.dueDate) return -1;
+      return new Date(a.dueDate) - new Date(b.dueDate);
+    });
+  }
 
   async function handleDeleteTask(task) {
     if (!task?.id) return;
@@ -93,7 +92,7 @@ export function TaskProvider({ children }) {
     const visibleTasks = nextHideCompleted
       ? results.filter((task) => !task.completed)
       : results;
-
+    sortTasks(visibleTasks);
     setTasks(visibleTasks);
     sethideCompleted(nextHideCompleted);
   }

@@ -17,14 +17,25 @@ import { useState } from "react";
 
 export default function Header() {
   const { toggleTheme, darkMode } = useTheme();
-  const { open, close, activeModal, modalData } = useModal();
+  const { open, close, activeModal, modalData, setModalData } = useModal();
   const { activeList, loadAllLists } = useList();
-  const [newList, setNewList] = useState("");
+  // newList holds the form data for creating a new list. Use an object
+  // shape { name: string } so it matches the FirebaseListService API.
+  const [newList, setNewList] = useState({ name: "" });
 
   async function handleNewList() {
     const listService = new FirebaseListService();
     await listService.addList(newList);
-    setNewList("");
+    setNewList({ name: "" });
+    close();
+    loadAllLists();
+  }
+
+  async function handleUpdateList() {
+    const listService = new FirebaseListService();
+    await listService.updateList(modalData);
+    // clear newList input in case the user opens the create flow next
+    setNewList({ name: "" });
     close();
     loadAllLists();
   }
@@ -101,7 +112,22 @@ export default function Header() {
         buttonText="Save"
         onClick={() => handleNewList(newList)}
       >
-        <NewListContent onChange={setNewList}></NewListContent>
+        <NewListContent
+          onChange={(value) => setNewList(value)}
+        ></NewListContent>
+      </Modal>
+
+      <Modal
+        isOpen={activeModal === "updateList"}
+        onClose={close}
+        title="Update List"
+        buttonText="Save"
+        onClick={() => handleUpdateList(modalData)}
+      >
+        <NewListContent
+          name={modalData?.name || ""}
+          onChange={(value) => setModalData((prev) => ({ ...prev, ...value }))}
+        ></NewListContent>
       </Modal>
     </div>
   );

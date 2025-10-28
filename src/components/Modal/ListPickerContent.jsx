@@ -6,11 +6,9 @@ import InboxIcon from "../../assets/icons/inbox.svg?react";
 import Button from "../Button/Button";
 import { useList } from "../../context/listProvider.jsx";
 import { useModal } from "../../context/modalProvider.jsx";
-import FirebaseListService from "../../firebase/FirebaseListService.js";
-import ActionModal from "./ActionModal.jsx";
 
 export default function ListPicker() {
-  const { toggleActiveList, lists, loadAllLists } = useList();
+  const { toggleActiveList, lists } = useList();
   const { open, close, activeModal, modalData } = useModal();
 
   function handleClick(list) {
@@ -21,6 +19,10 @@ export default function ListPicker() {
   function handleOpenDelete(list) {
     open("confirmDeleteList", list);
   }
+
+    function handleOpenUpdate(list) {
+      open("updateList", list);
+    }
 
   return (
     <div className={styles.listPickerContainer}>
@@ -55,6 +57,10 @@ export default function ListPicker() {
                     <EllipsisIcon className={`icon ${styles.iconEllipsis} `} />
                   }
                   variant="transparent"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleOpenUpdate(list);
+                  }}
                 />
                 <Button
                   text={<TrashIcon className={`icon ${styles.iconTrash} `} />}

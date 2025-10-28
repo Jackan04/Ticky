@@ -49,9 +49,7 @@ export default function NewTaskContent({
           onListChange(selected);
         }}
       >
-        <option value="" disabled>
-          Choose a List
-        </option>
+        <option value="">No List Selected</option>
         {lists.map((l) => (
           <option key={l.id} value={l.id}>
             {l.name}

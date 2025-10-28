@@ -22,7 +22,9 @@ export function ModalProvider({ children }) {
   }
 
   return (
-    <ModalContext.Provider value={{ open, close, activeModal, modalData }}>
+    <ModalContext.Provider
+      value={{ open, close, activeModal, modalData, setModalData }}
+    >
       {children}
     </ModalContext.Provider>
   );

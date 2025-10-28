@@ -43,15 +43,16 @@ export class FirebaseTaskService {
 
   async updateTask(task) {
     const tasksDocRef = doc(db, "tasks", task.id);
+    const updatedTask = {
+      title: task.title,
+      dueDate: task.dueDate,
+      notes: task.notes,
+      completed: task.completed,
+      listId: task.listId,
+      createdAt: Date.now(),
+    };
     try {
-      const updatedTask = await updateDoc(tasksDocRef, {
-        title: task.title,
-        dueDate: task.dueDate,
-        notes: task.notes,
-        completed: task.completed,
-        listId: task.listId,
-        createdAt: Date.now(),
-      });
+      await updateDoc(tasksDocRef, updatedTask);
       console.log("Document updated: ", updatedTask);
     } catch (error) {
       console.error("Error updating task:", error);

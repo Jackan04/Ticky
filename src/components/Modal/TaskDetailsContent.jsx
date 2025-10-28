@@ -54,9 +54,7 @@ export default function TaskDetailsContent({ task, isEditing, onChange }) {
                 });
               }}
             >
-              <option value="" disabled>
-                Choose a List
-              </option>
+              <option value="">No List Selected</option>
               {lists.map((l) => (
                 <option key={l.id} value={l.id}>
                   {l.name}

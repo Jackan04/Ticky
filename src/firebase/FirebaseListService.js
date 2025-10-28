@@ -27,7 +27,16 @@ export default class FirebaseListService {
 
   async getList() {}
 
-  async updateList() {}
+  async updateList(list) {
+    try {
+      const listsDocRef = doc(db, "lists", list.id);
+      const updatedList = { name: list.name, createdAt: Date.now() };
+      await updateDoc(listsDocRef, updatedList);
+      console.log("Updated list: ", updatedList);
+    } catch (error) {
+      console.error("Error updating list:", error);
+    }
+  }
 
   async addList(list) {
     try {

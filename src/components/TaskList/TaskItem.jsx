@@ -2,6 +2,8 @@ import styles from "./TaskList.module.css";
 import CheckBoxIcon from "../../assets/icons/check-box.svg?react";
 import EllipsisIcon from "../../assets/icons/ellipsis.svg?react";
 import TrashIcon from "../../assets/icons/trash.svg?react";
+import NotesIcon from "../../assets/icons/note.svg?react";
+import CalendarIcon from "../../assets/icons/calendar.svg?react";
 import Button from "../Button/Button";
 import { useModal } from "../../context/modalProvider.jsx";
 
@@ -38,7 +40,19 @@ export default function TaskItem({ task, onClick, listName }) {
           >
             {task.title}
           </span>
-          <span>{listName}</span>
+          <span className={styles.metaInfo}>
+            {listName}
+            {task.notes ? (
+              <NotesIcon className={`icon ${styles.iconIndicator}`} />
+            ) : (
+              ""
+            )}
+            {task.dueDate ? (
+              <CalendarIcon className={`icon ${styles.iconIndicator}`} />
+            ) : (
+              ""
+            )}
+          </span>
         </div>
       </div>
 

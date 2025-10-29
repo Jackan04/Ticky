@@ -90,8 +90,8 @@
   --grey-dark: #6b7280;
 
   /* Reds */
-  --red-dark: #ff7a6f; /* bright enough for visibility */
-  --red-light: #2a1c1c; /* subtle tinted background */
+  --red-dark: #ff7a6f;
+  --red-light: #2a1c1c;
 
   /* Greens */
   --green-dark: #4ddf78;
@@ -127,12 +127,13 @@ body {
   flex-direction: column;
   gap: var(--space-8);
   padding: var(--space-9);
-  margin: var(--space-3);
+  margin-top: var(--space-6);
   border-radius: var(--radius-md);
   background: var(--background);
   border: solid 1px var(--border);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-  max-width: 616px;
+  width: 600px;
+
 }
 
 input,
@@ -245,47 +246,51 @@ li {
   color: var(--subtext);
 }
 
+/* Mobile layout tweaks */
 @media (max-width: 480px) {
+
   :root {
-    /* Shadows (slightly tighter blur to reduce glow on small screens) */
+    /* Shadows */
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
     --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.12);
     --shadow-lg: 0 3px 8px rgba(0, 0, 0, 0.14);
 
-    /* Animations (unchanged: snappy still feels good on mobile) */
-    --global-transition: 0.1s ease-in-out;
-    --transform-translateY: translateY(1px);
-    --transform-translateY-negative: translateY(-1px);
-    --opacity-hover: 0.8;
-
-    /* Buttons: slightly less padding so they don't feel huge in lists */
+    /* Buttons */
     --padding-button: 0.5rem 1rem;
 
-    /* Spacing scale (compressed at the high end) */
-    --space-1: 0.25rem; /* 4px */
-    --space-2: 0.5rem; /* 8px */
-    --space-3: 0.625rem; /* 10px instead of 12px */
-    --space-4: 0.75rem; /* 12px instead of 16px */
-    --space-5: 1rem; /* 16px instead of 20px */
-    --space-6: 1.25rem; /* 20px instead of 24px */
-    --space-7: 1.5rem; /* 24px instead of 32px */
-    --space-8: 2rem; /* 32px instead of 40px */
-    --space-9: 2.5rem; /* 40px instead of 48px */
-    --space-10: 3rem; /* 48px instead of 64px */
-    --space-11: 3.5rem; /* 56px instead of 80px */
-    --space-12: 4rem; /* 64px instead of 96px */
+    /* Spacing scale */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.625rem;
+    --space-4: 0.75rem;
+    --space-5: 1rem;
+    --space-6: 1.25rem;
+    --space-7: 1.5rem;
+    --space-8: 2rem;
+    --space-9: 2.5rem;
+    --space-10: 3rem;
+    --space-11: 3.5rem;
+    --space-12: 4rem;
 
-    /* Font sizes (scale down headings first, body stays readable) */
-    --font-subtext: 0.8125rem; /* 13px instead of 14px */
-    --font-base: 0.9375rem; /* 15px instead of 16px */
-    --font-heading: 1.25rem; /* 20px instead of 24px */
-    --font-title: 1.5rem; /* 24px instead of 32px */
+    /* Font sizes*/
+    --font-subtext: 0.8125rem;
+    --font-base: 0.9375rem;
+    --font-heading: 1.25rem;
+    --font-title: 1.5rem;
 
-    /* Radius (slightly rounder small elements on mobile is fine) */
-    --radius-sm: 0.375rem; /* 6px instead of 4px */
-    --radius-md: 0.5rem; /* keep 8px */
-    --radius-lg: 0.75rem; /* keep 12px */
-    --radius-full: 9999px; /* same */
+    /* Radius */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-full: 9999px;
+  }
+  .App {
+      width: 400px;
+  }
+
+  .icon {
+    width: 1.25rem;
+    height: 1.25rem;
   }
 }
 
@@ -294,16 +299,14 @@ li {
   *:hover,
   *:active,
   *:focus {
-    /* Remove visual feedback meant for desktop cursors */
     transform: none !important;
     opacity: 1 !important;
     box-shadow: none !important;
     filter: none !important;
   }
 
-  /* Optional: disable tap highlight on mobile browsers */
+  /* Disable tap highlights */
   * {
     -webkit-tap-highlight-color: transparent;
   }
 }
-

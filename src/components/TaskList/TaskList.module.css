@@ -25,9 +25,9 @@
 }
 
 .stats {
-  width: 70%;
   display: inline-flex;
   justify-content: space-around;
+  gap: var(--space-3);
 }
 
 /* Task Item */
@@ -54,9 +54,22 @@
 }
 
 .text {
+  align-items: center;
   color: var(--text-primary);
   word-break: break-word;
   overflow-wrap: break-word;
+}
+
+.metaInfo{
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.iconIndicator{
+  fill: var(--subtext);
+  width: var(  --font-subtext);
+  height: var(  --font-subtext);
 }
 
 .controlsLeft {
@@ -88,4 +101,10 @@
 
 .iconCheckBox.completed {
   fill: var(--green-dark);
+}
+
+@media (max-width: 480px) {
+  .task .hide {
+    display: flex;
+  }
 }

@@ -120,12 +120,13 @@ body {
   justify-content: center;
   align-items: flex-start;
   height: 100vh;
-  margin: var(--space-4);
+
 }
 
 .App {
   display: flex;
   flex-direction: column;
+  margin: var(--space-6);
   gap: var(--space-8);
   padding: var(--space-9);
   border-radius: var(--radius-md);

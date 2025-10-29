@@ -1,16 +1,46 @@
-# React + Vite
+# TodoApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A playful, minimal personal to‑do app — delightful enough to actually use. Track lists, add tasks (quick or detailed), set due dates, and keep things tidy without the bloated stuff.
 
-Currently, two official plugins are available:
+What makes it unique
+- Focused on quick capture and a small, pleasant UI
+- Minimalism over feature bloat — useful for personal task management
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Core features
+- Create, edit, and delete lists
+- Add tasks quickly or via a detailed modal (title, notes, due date)
+- Toggle tasks complete / hide completed
+- Simple list filtering and task counts
 
-## React Compiler
+Tech stack
+- React (Vite)
+- Firebase Firestore
+- CSS variables + CSS modules
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Run locally
 
-## Expanding the ESLint configuration
+1. Install dependencies
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+   npm install
+
+2. Start the dev server
+
+   npm run dev
+
+Open http://localhost:5173 (or the URL printed by Vite) in your browser.
+
+Build for production
+
+1. Create a production build
+
+   npm run build
+
+2. Preview the production build locally (optional)
+
+   npm run preview
+
+Notes
+- This is a personal side project — small, iterative, and opinionated. Tweak it however you like.
+- If you use Firebase, make sure your `src/firebase/FirebaseConfig.js` is configured with your project credentials.
+
+If you want, I can help add tests, CI, or a deployment script.

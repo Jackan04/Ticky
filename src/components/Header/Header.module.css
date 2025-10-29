@@ -32,10 +32,10 @@
   fill: currentColor;
 }
 
-.iconMoonFilled {
+.lightbulbFilled {
   fill: var(--yellow-dark);
 }
 
-.iconMoon {
+.lightbulb {
   fill: var(--text-primary);
 }

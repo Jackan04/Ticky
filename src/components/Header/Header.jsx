@@ -16,11 +16,9 @@ import FirebaseListService from "../../firebase/FirebaseListService.js";
 import { useState } from "react";
 
 export default function Header() {
-  const { toggleTheme, darkMode } = useTheme();
+  const { toggleTheme, theme } = useTheme();
   const { open, close, activeModal, modalData, setModalData } = useModal();
   const { activeList, loadAllLists } = useList();
-  // newList holds the form data for creating a new list. Use an object
-  // shape { name: string } so it matches the FirebaseListService API.
   const [newList, setNewList] = useState({ name: "" });
 
   async function handleNewList() {
@@ -34,7 +32,6 @@ export default function Header() {
   async function handleUpdateList() {
     const listService = new FirebaseListService();
     await listService.updateList(modalData);
-    // clear newList input in case the user opens the create flow next
     setNewList({ name: "" });
     close();
     loadAllLists();
@@ -67,12 +64,12 @@ export default function Header() {
           onClick={toggleTheme}
           variant="transparent"
           icon={
-            darkMode ? (
-              <LightbulbIcon className={`icon ${styles.iconMoon}`} />
-            ) : (
+            theme === "light" ? (
               <LightbulbFilledIcon
-                className={`icon ${styles.iconMoonFilled}`}
+                className={`icon ${styles.lightbulbFilled}`}
               />
+            ) : (
+              <LightbulbIcon className={`icon ${styles.lightbulb}`} />
             )
           }
         ></Button>

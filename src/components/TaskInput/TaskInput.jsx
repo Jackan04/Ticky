@@ -2,7 +2,7 @@ import styles from "./TaskInput.module.css";
 import PlusIcon from "../../assets/icons/plus.svg?react";
 import DropdownIcon from "../../assets/icons/drop-down.svg?react";
 import Button from "../Button/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "../Modal/Modal";
 import NewTaskContent from "../Modal/NewTaskContent.jsx";
 import { useModal } from "../../context/modalProvider.jsx";
@@ -18,6 +18,12 @@ export default function TaskInput() {
   const [list, setList] = useState("");
   const [notes, setNotes] = useState("");
   const { loadAllTasks } = useTask();
+
+  useEffect(() => {
+    if (activeModal === "newTask") {
+      setList(activeList || null);
+    }
+  }, [activeModal, activeList]);
 
   function handleInputChange(event) {
     setInputTitle(event.target.value); // For passing current titleInput value from taskInput to the detailed view

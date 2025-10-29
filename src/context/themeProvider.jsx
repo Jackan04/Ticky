@@ -7,21 +7,27 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }) {
-  const [darkMode, setDarkMode] = useState(false);
+  const [theme, setTheme] = useState("light");
+
+  function loadThemeFromStorage() {
+    setTheme(localStorage.getItem("theme"));
+    const themeValue = theme === "light" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", themeValue);
+  }
 
   function toggleTheme() {
-    setDarkMode((mode) => !mode);
+    setTheme(() => {
+      const newTheme = theme === "light" ? "dark" : "light";
+      localStorage.setItem("theme", newTheme);
+    });
   }
 
   useEffect(() => {
-    document.documentElement.setAttribute(
-      "data-theme",
-      darkMode ? "dark" : "light"
-    );
-  }, [darkMode]);
+    loadThemeFromStorage();
+  }, [theme]);
 
   return (
-    <ThemeContext.Provider value={{ toggleTheme, darkMode }}>
+    <ThemeContext.Provider value={{ toggleTheme, theme }}>
       {children}
     </ThemeContext.Provider>
   );

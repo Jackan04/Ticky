@@ -11,6 +11,7 @@
 }
 
 .text {
+  color: var(--text-primary);
   font-size: var(--text-base);
   padding: var(--space-2);
 }

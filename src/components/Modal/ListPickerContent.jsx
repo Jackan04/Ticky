@@ -8,7 +8,7 @@ import { useList } from "../../context/listProvider.jsx";
 import { useModal } from "../../context/modalProvider.jsx";
 
 export default function ListPicker() {
-  const { toggleActiveList, lists } = useList();
+  const { toggleActiveList, lists, activeList } = useList();
   const { open, close, activeModal, modalData } = useModal();
 
   function handleClick(list) {
@@ -29,7 +29,12 @@ export default function ListPicker() {
       <div className={styles.lists}>
         <p className="subText">Views</p>
         <ul className={styles.listPicker}>
-          <li className={styles.list} onClick={() => handleClick()}>
+          <li
+            className={`${styles.list} ${
+              !activeList ? styles.active : ""
+            }`}
+            onClick={() => handleClick()}
+          >
             <div className={styles.controlsLeft}>
               <InboxIcon className={`icon ${styles.iconInbox}`} />
               <p>All To-Dos</p>
@@ -42,7 +47,9 @@ export default function ListPicker() {
         <ul className={styles.listPicker}>
           {lists.map((list) => (
             <li
-              className={styles.list}
+              className={`${styles.list} ${
+                activeList === list ? styles.active : ""
+              }`}
               key={list.id}
               onClick={() => handleClick(list)}
             >

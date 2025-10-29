@@ -11,7 +11,6 @@ export function useTask() {
 
 export function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
-  const [hideCompleted, sethideCompleted] = useState(false);
   const { activeList, loadAllLists, lists } = useList();
   const { close } = useModal();
   const [stats, setStats] = useState([
@@ -35,14 +34,12 @@ export function TaskProvider({ children }) {
         const allTasks = await taskService.getAllTasks();
         sortTasks(allTasks);
         setTasks(allTasks);
-        sethideCompleted(false);
         computeStats(allTasks);
       } else {
         const resultsByList = await taskService.getTasksByList(activeList.id);
         sortTasks(resultsByList);
 
         setTasks(resultsByList);
-        sethideCompleted(false);
         computeStats(resultsByList);
       }
     } catch (error) {
@@ -86,24 +83,6 @@ export function TaskProvider({ children }) {
     await loadAllTasks();
   }
 
-  async function toggleHideCompleted(listId) {
-    const taskService = new FirebaseTaskService();
-
-    const results = activeList
-      ? await taskService.getTasksByList(listId)
-      : await taskService.getAllTasks();
-
-    const nextHideCompleted = !hideCompleted;
-
-    const visibleTasks = nextHideCompleted
-      ? results.filter((task) => !task.completed)
-      : results;
-    sortTasks(visibleTasks);
-    setTasks(visibleTasks);
-    sethideCompleted(nextHideCompleted);
-    computeStats(visibleTasks);
-  }
-
   function computeStats(sourceTasks) {
     const allTasks = sourceTasks.length;
     const remainingTasks = sourceTasks.filter((task) => !task.completed).length;
@@ -125,11 +104,9 @@ export function TaskProvider({ children }) {
     <TaskContext.Provider
       value={{
         tasks,
-        hideCompleted,
         stats,
         loadAllTasks,
         toggleCompleted,
-        toggleHideCompleted,
         handleDeleteTask,
         getListNameById,
         getStats,

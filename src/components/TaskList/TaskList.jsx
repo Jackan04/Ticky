@@ -2,28 +2,23 @@ import styles from "./TaskList.module.css";
 import TaskItem from "./TaskItem";
 import Modal from "../Modal/Modal";
 import TaskDetailsContent from "../Modal/TaskDetailsContent";
-import ActionConfirmContent from "../Modal/ActionConfirmContent";
 import ActionModal from "../Modal/ActionModal";
 import { useEffect, useState } from "react";
 import { useModal } from "../../context/modalProvider";
 import { FirebaseTaskService } from "../../firebase/FirebaseTaskService";
 import { useList } from "../../context/listProvider";
 import { useTask } from "../../context/taskProvider";
-import Button from "../Button/Button";
 import StatsCard from "../StatsCard/StatsCard";
 
 export default function TaskList() {
   const { close, activeModal, modalData } = useModal();
-  const { activeList, loadAllLists, lists } = useList();
+  const { activeList, loadAllLists } = useList();
   const {
     tasks,
     loadAllTasks,
     toggleCompleted,
-    toggleHideCompleted,
-    hideCompleted,
     handleDeleteTask,
     getListNameById,
-    getStats,
     stats,
   } = useTask();
   const [isEditing, setIsEditing] = useState(false);
@@ -58,16 +53,6 @@ export default function TaskList() {
     return (
       <div className={styles.emptyState}>
         <p className={styles.emptyStateText}>No To-Dos to display</p>
-
-        {/* <Button
-          variant="transparent"
-          text={hideCompleted ? "Show Completed" : "Hide Completed"}
-          onClick={
-            activeList
-              ? () => toggleHideCompleted(activeList.id)
-              : () => toggleHideCompleted()
-          }
-        ></Button> */}
       </div>
     );
   }
@@ -102,18 +87,6 @@ export default function TaskList() {
         ))}
       </ul>
 
-      {/* <Button
-        className={styles.btnHideCompleted}
-        variant="transparent"
-        text={hideCompleted ? "Show Completed" : "Hide Completed"}
-        onClick={
-          activeList
-            ? () => toggleHideCompleted(activeList.id)
-            : () => toggleHideCompleted()
-        }
-      ></Button> */}
-
-      {/* Single modal for all task details */}
       <Modal
         isOpen={activeModal === "taskDetails"}
         onClose={close}

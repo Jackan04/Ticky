@@ -1,0 +1,30 @@
+.card {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--grey-light);
+}
+
+.number {
+  padding: var(--space-2);
+}
+
+.text {
+  padding: var(--space-2);
+}
+
+.number.blue {
+  background-color: var(--blue-light);
+  color: var(--blue-dark);
+}
+
+.number.green {
+  background-color: var(--green-light);
+  color: var(--green-dark);
+}
+
+.number.red {
+  background-color: var(--red-light);
+  color: var(--red-dark);
+}

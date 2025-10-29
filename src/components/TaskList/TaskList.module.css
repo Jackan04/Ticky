@@ -24,6 +24,12 @@
   color: var(--subtext);
 }
 
+.stats {
+  width: 70%;
+  display: inline-flex;
+  justify-content: space-around;
+}
+
 /* Task Item */
 .task {
   display: flex;

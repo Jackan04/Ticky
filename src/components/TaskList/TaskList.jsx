@@ -10,6 +10,7 @@ import { FirebaseTaskService } from "../../firebase/FirebaseTaskService";
 import { useList } from "../../context/listProvider";
 import { useTask } from "../../context/taskProvider";
 import Button from "../Button/Button";
+import StatsCard from "../StatsCard/StatsCard";
 
 export default function TaskList() {
   const { close, activeModal, modalData } = useModal();
@@ -22,6 +23,8 @@ export default function TaskList() {
     hideCompleted,
     handleDeleteTask,
     getListNameById,
+    getStats,
+    stats,
   } = useTask();
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState(null);
@@ -56,7 +59,7 @@ export default function TaskList() {
       <div className={styles.emptyState}>
         <p className={styles.emptyStateText}>No To-Dos to display</p>
 
-        <Button
+        {/* <Button
           variant="transparent"
           text={hideCompleted ? "Show Completed" : "Hide Completed"}
           onClick={
@@ -64,13 +67,30 @@ export default function TaskList() {
               ? () => toggleHideCompleted(activeList.id)
               : () => toggleHideCompleted()
           }
-        ></Button>
+        ></Button> */}
       </div>
     );
   }
 
   return (
     <div className={styles.container}>
+        <div className={styles.stats}>
+          <StatsCard
+            color="blue"
+            value={stats[0].value}
+            label="All"
+          ></StatsCard>
+          <StatsCard
+            color="red"
+            value={stats[1].value}
+            label="Remaining"
+          ></StatsCard>
+          <StatsCard
+            color="green"
+            value={stats[2].value}
+            label="Completed"
+          ></StatsCard>
+        </div>
       <ul className={styles.list}>
         {tasks.map((task) => (
           <TaskItem
@@ -82,7 +102,7 @@ export default function TaskList() {
         ))}
       </ul>
 
-      <Button
+      {/* <Button
         className={styles.btnHideCompleted}
         variant="transparent"
         text={hideCompleted ? "Show Completed" : "Hide Completed"}
@@ -91,7 +111,7 @@ export default function TaskList() {
             ? () => toggleHideCompleted(activeList.id)
             : () => toggleHideCompleted()
         }
-      ></Button>
+      ></Button> */}
 
       {/* Single modal for all task details */}
       <Modal

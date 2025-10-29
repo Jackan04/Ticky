@@ -14,6 +14,11 @@ export function TaskProvider({ children }) {
   const [hideCompleted, sethideCompleted] = useState(false);
   const { activeList, loadAllLists, lists } = useList();
   const { close } = useModal();
+  const [stats, setStats] = useState([
+    { value: 0 },
+    { value: 0 },
+    { value: 0 },
+  ]);
 
   useEffect(() => {
     const load = async () => {
@@ -29,22 +34,23 @@ export function TaskProvider({ children }) {
       if (!activeList) {
         const allTasks = await taskService.getAllTasks();
         sortTasks(allTasks);
-
         setTasks(allTasks);
         sethideCompleted(false);
+        computeStats(allTasks);
       } else {
         const resultsByList = await taskService.getTasksByList(activeList.id);
         sortTasks(resultsByList);
 
         setTasks(resultsByList);
         sethideCompleted(false);
+        computeStats(resultsByList);
       }
     } catch (error) {
       console.error("Failed to load tasks: ", error);
     }
   }
 
-  async function sortTasks(tasks) {
+  function sortTasks(tasks) {
     // Sort tasks by completed and dueDate
     // Tasks without a dueDate appears last in the list
     return tasks.sort((a, b) => {
@@ -95,6 +101,24 @@ export function TaskProvider({ children }) {
     sortTasks(visibleTasks);
     setTasks(visibleTasks);
     sethideCompleted(nextHideCompleted);
+    computeStats(visibleTasks);
+  }
+
+  function computeStats(sourceTasks) {
+    const allTasks = sourceTasks.length;
+    const remainingTasks = sourceTasks.filter((task) => !task.completed).length;
+    const completedTasks = sourceTasks.filter((task) => task.completed).length;
+
+    setStats([
+      { value: allTasks },
+      { value: remainingTasks },
+      { value: completedTasks },
+    ]);
+  }
+
+  // keep getStats as a utility that recomputes stats from current state if needed
+  function getStats() {
+    computeStats(tasks);
   }
 
   return (
@@ -102,11 +126,13 @@ export function TaskProvider({ children }) {
       value={{
         tasks,
         hideCompleted,
+        stats,
         loadAllTasks,
         toggleCompleted,
         toggleHideCompleted,
         handleDeleteTask,
         getListNameById,
+        getStats,
       }}
     >
       {children}

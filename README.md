@@ -12,6 +12,7 @@ Ticky lets you create lists, add tasks, set due dates, and jot down notes, helpi
 - ✅ Mark tasks as complete
 - 📊 View stats for each list (all / remaining / completed)
 - 🔍 Filter tasks by list or show all tasks
+- 🗓️ Tasks are automatically sorted by due date, with completed tasks moved to the bottom.
 - 🌗 Toggle **light/dark theme**, saved in local storage
 
 ## Screenshots

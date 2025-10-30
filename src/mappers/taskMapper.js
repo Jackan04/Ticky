@@ -1,4 +1,4 @@
-import { formatDate, normalizeListId } from "../../helpers";
+import { formatDate, normalizeListId } from "../helpers";
 
 export default function mapFirebaseTask(doc) {
   const data = doc.data();

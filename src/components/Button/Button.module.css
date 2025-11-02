@@ -11,6 +11,8 @@
   cursor: pointer;
   box-shadow: var(--shadow-sm);
   transition: var(--global-transition);
+  transform: translateZ(0) translateY(0);
+  will-change: transform, opacity;
 }
 
 .btn:hover {

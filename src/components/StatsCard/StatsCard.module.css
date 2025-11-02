@@ -8,6 +8,7 @@
 
 .number {
   padding: var(--space-2);
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
 }
 
 .text {

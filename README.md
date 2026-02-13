@@ -5,15 +5,15 @@ Ticky lets you create lists, add tasks, set due dates, and jot down notes, helpi
 
 ## Core Features
 
-- 📝 Create, edit, and delete **tasks**
-- 📁 Create, edit, and delete **lists**
-- 👀 View task details by clicking on the _ellipsis_ icon (hover on desktop, always visible on mobile)
-- ➕ Quick-add tasks from the header or open the detailed add modal (title, notes, due date, list)
-- ✅ Mark tasks as complete
-- 📊 View stats for each list (all / remaining / completed)
-- 🔍 Filter tasks by list or show all tasks
-- 🗓️ Tasks are automatically sorted by due date, with completed tasks moved to the bottom.
-- 🌗 Toggle **light/dark theme**, saved in local storage
+- Create, edit, and delete **tasks**
+- Create, edit, and delete **lists**
+- View task details by clicking on the _ellipsis_ icon (hover on desktop, always visible on mobile)
+- Quick-add tasks from the header or open the detailed add modal (title, notes, due date, list)
+- Mark tasks as complete
+- View stats for each list (all / remaining / completed)
+- Filter tasks by list or show all tasks
+- Tasks are automatically sorted by due date, with completed tasks moved to the bottom.
+- Toggle **light/dark theme**, saved in local storage
 
 ## Screenshots
 

@@ -30,21 +30,10 @@ Ticky lets you create lists, add tasks, set due dates, and jot down notes, helpi
   <img src="./public/screenshots/screenshot-10.png" alt="Mobile view" width="300"/>
 </p>
 
-## Key Concepts Used
-
-- **React Hooks** — `useState`, `useEffect`, and `useContext` to handle UI state and logic
-- **Context + Provider pattern** — `ModalProvider`, `ListProvider`, `TaskProvider`, and `ThemeProvider` for global data sharing (no prop drilling)
-- **Reusable components** — small, flexible components that make the app easy to maintain and extend
-- **Modal composition** — one dynamic `<Modal />` that renders different kinds of content
-- **Data mapping & normalization** — Firestore data (tasks/lists) mapped into type-safe, consistent shapes; normalized `listId`s, formatted dates, etc.
-- **Firebase Firestore** — CRUD operations, queries, and managing `DocumentReference` vs string IDs
-- **CSS variables + modules** — for theme tokens, scoped styles, and consistent design throughout the app
-
 ## Tech Stack
 
 - React (Vite)
 - Firebase Firestore
-- CSS Modules + CSS Variables
 
 ## Run Locally
 
@@ -53,7 +42,7 @@ Firebase setup (local)
 1. Create a Firebase project at https://console.firebase.google.com/ and enable Firestore.
 2. Create a Web app in your Firebase project and copy the config values.
 3. In the project root create a `.env.local` file (this file is ignored by git).
-4. Add the Vite-style keys (example names provided in `.env.example`):
+4. Add the keys (sample names provided in `.env.example`):
 
 **Run**
 

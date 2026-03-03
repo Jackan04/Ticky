@@ -1,4 +1,4 @@
-# Task Manager — Personal Task Manager
+# Task Manager
 
 A delightful and minimal personal task manager built with React and Firebase.
 Task Manager lets you create lists, add tasks, set due dates, and jot down notes, helping you stay organized without the clutter. It’s fast, simple, and designed to feel like a digital extension of your notebook.
